@@ -275,7 +275,7 @@ Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equi
         )
         .addFields(
             {
-                name: "⚠️ O Brasil Play Life não é para qualquer um",
+                name: "<:emoji_67:1448022730833268776> O Brasil Play Life não é para qualquer um",
                 value:
 `<:1054538048710385716:1417286986389000284> É para quem busca imersão total
 <:1054538048710385716:1417286986389000284> É para quem respeita as regras
