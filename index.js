@@ -316,6 +316,41 @@ if (command === "conexao") {
     message.channel.send({ embeds: [embed] });
 }
 
+//==== COMANDO !comunidade ====//
+if (command === "comunidade") {
+
+    const embed = new EmbedBuilder()
+        .setTitle("🌐 Comunidade Brasil Play Life")
+        .setColor("#2b6cff")
+        .setDescription(
+`Olá, **Brasil Play Life**
+
+Temos o prazer de apresentar a **Comunidade Brasil Play Life**, uma rede de servidores dedicada a proporcionar a melhor experiência de jogo para você.
+
+🚀 Atualmente contamos com servidores ativos:`
+        )
+        .addFields(
+            {
+                name: "🔴 Brasil Play Life - vRED",
+                value:
+`🌐 [Entrar no Discord](https://discord.gg/Smy3D478qv)
+📡 IP: \`server.brasilplaylife.com.br:7778\``,
+                inline: false
+            },
+            {
+                name: "🟢 Brasil Play Life - vGREEN",
+                value:
+`🌐 [Entrar no Discord](https://discord.gg/UYb6Rc2A)
+📡 IP: \`server.brasilplaylife.com.br:7779\``,
+                inline: false
+            }
+        )
+        .setFooter({
+            text: "Brasil Play Life • Comunidade Oficial"
+        });
+
+    message.channel.send({ embeds: [embed] });
+}
 
     
 });
