@@ -186,50 +186,6 @@ client.on('interactionCreate', async interaction => {
     }
 }); // <--- O fechamento vital que estava faltando/errado
 
-// ==== COMANDO !informacoese ====//
-if (command === "informacoes") {
-
-    const embed = new EmbedBuilder()
-        .setTitle("<:emoji_73:1140329738368450671> BEM-VINDO AO BRASIL PLAY LIFE vBlue (BPL) <a:aviso_bpl:798815607537401856>")
-        .setColor("#2b6cff")
-        .setDescription(
-`O Brasil Play Life Roleplay (BPL) é um servidor SA-MP focado em Extreme Roleplay, desenvolvido para jogadores que realmente querem viver uma experiência intensa, realista e imersiva dentro do universo do RP brasileiro.
-
-Aqui não existe espaço para zoação, atitudes Anti-RP ou falta de comprometimento — cada ação tem consequência, cada escolha molda seu futuro e cada personagem constrói sua própria história.
-
-No BPL, o realismo vem sempre em primeiro lugar. Nosso sistema é estruturado para proporcionar uma experiência séria e organizada, onde disciplina e interpretação são fundamentais.
-
-Trabalhamos com uma economia equilibrada e progressiva, garantindo que cada conquista seja fruto de esforço e dedicação.
-
-Contamos com facções e organizações baseadas na realidade, profissões estruturadas, sistema policial com procedimentos reais e regras bem definidas.
-
-Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equilíbrio da comunidade.`
-        )
-        .addFields(
-            {
-                name: "⚠️ O Brasil Play Life não é para qualquer um",
-                value:
-`<:1054538048710385716:1417286986389000284> É para quem busca imersão total
-<:1054538048710385716:1417286986389000284> É para quem respeita as regras
-<:1054538048710385716:1417286986389000284> É para quem entende que RP é compromisso`
-            },
-            {
-                name: "📋 Antes de iniciar sua jornada",
-                value:
-`<:5483discordticemoji:1420915655317917827> Ler e compreender as regras
-<:5483discordticemoji:1420915655317917827> Aceitar os termos do servidor
-<:5483discordticemoji:1420915655317917827> Utilizar microfone
-<:5483discordticemoji:1420915655317917827> Agir sempre com bom senso`
-            }
-        )
-        .setFooter({
-            text: "Brasil Play Life vBlue — Realismo • Disciplina • Consequência"
-        });
-
-    message.channel.send({ embeds: [embed] });
-}
-
-
 
 // ===== COMANDO !painel =====
 client.on('messageCreate', async message => {
@@ -298,5 +254,50 @@ client.on('messageCreate', async message => {
         });
     }
 });
+
+// ==== COMANDO !imformações ====//
+if (command === "informacoes") {
+
+    const embed = new EmbedBuilder()
+        .setTitle("<:emoji_73:1140329738368450671> BEM-VINDO AO BRASIL PLAY LIFE vBlue (BPL) <a:aviso_bpl:798815607537401856>")
+        .setColor("#2b6cff")
+        .setDescription(
+`O Brasil Play Life Roleplay (BPL) é um servidor SA-MP focado em Extreme Roleplay, desenvolvido para jogadores que realmente querem viver uma experiência intensa, realista e imersiva dentro do universo do RP brasileiro.
+
+Aqui não existe espaço para zoação, atitudes Anti-RP ou falta de comprometimento — cada ação tem consequência, cada escolha molda seu futuro e cada personagem constrói sua própria história.
+
+No BPL, o realismo vem sempre em primeiro lugar. Nosso sistema é estruturado para proporcionar uma experiência séria e organizada, onde disciplina e interpretação são fundamentais.
+
+Trabalhamos com uma economia equilibrada e progressiva, garantindo que cada conquista seja fruto de esforço e dedicação.
+
+Contamos com facções e organizações baseadas na realidade, profissões estruturadas, sistema policial com procedimentos reais e regras bem definidas.
+
+Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equilíbrio da comunidade.`
+        )
+        .addFields(
+            {
+                name: "⚠️ O Brasil Play Life não é para qualquer um",
+                value:
+`<:1054538048710385716:1417286986389000284> É para quem busca imersão total
+<:1054538048710385716:1417286986389000284> É para quem respeita as regras
+<:1054538048710385716:1417286986389000284> É para quem entende que RP é compromisso`
+            },
+            {
+                name: "📋 Antes de iniciar sua jornada",
+                value:
+`<:5483discordticemoji:1420915655317917827> Ler e compreender as regras
+<:5483discordticemoji:1420915655317917827> Aceitar os termos do servidor
+<:5483discordticemoji:1420915655317917827> Utilizar microfone
+<:5483discordticemoji:1420915655317917827> Agir sempre com bom senso`
+            }
+        )
+        .setFooter({
+            text: "Brasil Play Life vBlue — Realismo • Disciplina • Consequência"
+        });
+
+    message.channel.send({ embeds: [embed] });
+}
+
+
 
 client.login(process.env.TOKEN_BOT);
