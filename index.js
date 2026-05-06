@@ -64,7 +64,7 @@ client.once('ready', () => {
     status: "online",
     activities: [
       {
-        name: "🌐 Brasil Play Life — Suporte & RolePlay 24h",
+        name: "🌐 Brasil Play Life — Suporte & RolePlay",
         type: ActivityType.Custom
       }
     ]
