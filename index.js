@@ -253,7 +253,6 @@ client.on('messageCreate', async message => {
             components: [menu]
         });
     }
-});
 
 // ==== COMANDO !imformações ====//
 if (command === "informacoes") {
@@ -297,6 +296,10 @@ Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equi
 
     message.channel.send({ embeds: [embed] });
 }
+    
+});
+
+
 
 
 
