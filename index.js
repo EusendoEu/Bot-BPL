@@ -61,14 +61,14 @@ client.once('ready', () => {
     console.log(`Bot online como ${client.user.tag}`);
 
     client.user.setPresence({
-        activities: [{
-            name: "🎫 Atendimento 24/7 • Brasil Play Life vBlue",
-            type: ActivityType.Playing
-        }],
-        status: "online"
-    });
-});
-
+    status: "online",
+    activities: [
+      {
+        name: "🚀🌐 Brasil Play Life — Suporte & Role-Play 24h",
+        type: ActivityType.Custom
+      }
+    ]
+  });
 // ===== INTERAÇÕES =====
 client.on('interactionCreate', async interaction => {
 
