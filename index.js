@@ -69,6 +69,8 @@ client.once('ready', () => {
       }
     ]
   });
+});
+    
 // ===== INTERAÇÕES =====
 client.on('interactionCreate', async interaction => {
 
