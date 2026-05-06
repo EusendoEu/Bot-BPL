@@ -296,6 +296,27 @@ if (command === "informacoes") {
 
     message.channel.send({ embeds: [embed] });
 }
+
+//==== COMANDO !conexao ====//
+if (command === "conexao") {
+
+    const embed = new EmbedBuilder()
+        .setTitle("<:bplblue:1438273471418208337> Brasil Play Life Roleplay - vBlue <:bplblue:1438273471418208337>")
+        .setColor("#2b6cff")
+        .setDescription(
+`<:1054538048710385716:1417286986389000284> O servidor se encontra **ONLINE!**
+
+**IP:** \`server.brasilplaylife.com.br:7779\`
+**IP Numérico:** \`151.242.227.124:7779\``
+        )
+        .setFooter({
+            text: "🔷 Brasil Play Life vBlue",
+        });
+
+    message.channel.send({ embeds: [embed] });
+}
+
+
     
 });
 
