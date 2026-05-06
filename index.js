@@ -217,7 +217,7 @@ client.on('messageCreate', async message => {
         { name: " <:emoji_76:1275944533288554506> Dúvidas", value: "Perguntas sobre o servidor ou funcionamento.", inline: false }
     )
     .setColor("#2b6cff")
-.setImage("https://cdn.discordapp.com/attachments/1378768235247440088/1501365628244590692/file_00000000c78c71f5b0e80a79cd7a8a88.png?ex=69fbcf33&is=69fa7db3&hm=13169a875c2dc2b7ea18e136d2c4f06162f8e2c2e0c308bd615955d55d776a03&")
+.setImage("https://cdn.discordapp.com/attachments/1415896639540826173/1501719310882832546/file_00000000c78c71f5b0e80a79cd7a8a88.png?ex=69fd1898&is=69fbc718&hm=e110a0f1404eee237b42a605975c1807fa7161feb687a4f568214a552c1f8fd0&")
     .setFooter({ text: "Brasil Play Life • Atendimento" });
 
         const menu = new ActionRowBuilder().addComponents(
