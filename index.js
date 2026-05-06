@@ -207,8 +207,8 @@ client.on('messageCreate', async message => {
     .setTitle(" Central de Atendimento — Brasil Play Life")
     .setDescription(
         "Bem-vindo ao suporte oficial.\n\n" +
-        "Selecione abaixo o tipo de atendimento que você precisa.\n\n" +
-         "Abra um ticket apenas se for realmente necessário.\n" +
+        "• Selecione abaixo o tipo de atendimento que você precisa.\n\n" +
+         "• Abra um ticket apenas se for realmente necessário.\n" +
         "📌 Descreva seu problema com clareza para agilizar o atendimento."
     )   
     .addFields(
