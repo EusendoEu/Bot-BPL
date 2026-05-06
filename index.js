@@ -52,12 +52,11 @@ const PREFIX = "!";
 // ==================
 
 // carregar comandos
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./comandos').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command = require(`./comandos/${file}`);
     client.commands.set(command.data.name, command);
 }
-
 client.once('ready', () => {
     console.log(`Bot online como ${client.user.tag}`);
 
