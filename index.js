@@ -261,17 +261,17 @@ if (command === "informacoes") {
         .setTitle("<:emoji_73:1140329738368450671> BEM-VINDO AO BRASIL PLAY LIFE vBlue (BPL) <a:aviso_bpl:798815607537401856>")
         .setColor("#2b6cff")
         .setDescription(
-`O Brasil Play Life Roleplay (BPL) é um servidor SA-MP focado em Extreme Roleplay, desenvolvido para jogadores que realmente querem viver uma experiência intensa, realista e imersiva dentro do universo do RP brasileiro.
+`• O Brasil Play Life Roleplay (BPL) é um servidor SA-MP focado em Extreme Roleplay, desenvolvido para jogadores que realmente querem viver uma experiência intensa, realista e imersiva dentro do universo do RP brasileiro.
 
-Aqui não existe espaço para zoação, atitudes Anti-RP ou falta de comprometimento — cada ação tem consequência, cada escolha molda seu futuro e cada personagem constrói sua própria história.
+• Aqui não existe espaço para zoação, atitudes Anti-RP ou falta de comprometimento — cada ação tem consequência, cada escolha molda seu futuro e cada personagem constrói sua própria história.
 
-No BPL, o realismo vem sempre em primeiro lugar. Nosso sistema é estruturado para proporcionar uma experiência séria e organizada, onde disciplina e interpretação são fundamentais.
+• No BPL, o realismo vem sempre em primeiro lugar. Nosso sistema é estruturado para proporcionar uma experiência séria e organizada, onde disciplina e interpretação são fundamentais.
 
-Trabalhamos com uma economia equilibrada e progressiva, garantindo que cada conquista seja fruto de esforço e dedicação.
+• Trabalhamos com uma economia equilibrada e progressiva, garantindo que cada conquista seja fruto de esforço e dedicação.
 
-Contamos com facções e organizações baseadas na realidade, profissões estruturadas, sistema policial com procedimentos reais e regras bem definidas.
+• Contamos com facções e organizações baseadas na realidade, profissões estruturadas, sistema policial com procedimentos reais e regras bem definidas.
 
-Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equilíbrio da comunidade.`
+• Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equilíbrio da comunidade.`
         )
         .addFields(
             {
@@ -291,7 +291,7 @@ Nossa staff é ativa, imparcial e experiente, sempre presente para manter o equi
             }
         )
         .setFooter({
-            text: "<:emoji_67:1448022730833268776> Brasil Play Life vBlue — Realismo • Disciplina • Consequência"
+            text: " 🔷 Brasil Play Life vBlue "
         });
 
     message.channel.send({ embeds: [embed] });
