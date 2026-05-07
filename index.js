@@ -108,6 +108,19 @@ if (tipo === 'compras') {
     ];
 }
 
+           const ticketsAbertos = interaction.guild.channels.cache.filter(
+    c =>
+        c.name.startsWith(`ticket-${interaction.user.username}`) &&
+        c.parentId === categoriaID
+);
+
+if (ticketsAbertos.size >= 2) {
+    return interaction.reply({
+        content: "❌ Você já possui 2 tickets abertos.",
+        ephemeral: true
+    });
+}
+
             const canal = await interaction.guild.channels.create({
                 name: `ticket-${interaction.user.username}`,
                 type: ChannelType.GuildText,
