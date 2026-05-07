@@ -215,7 +215,8 @@ client.on('messageCreate', async message => {
     .addFields(
         { name: " <:Manutencao:797161188965220394> Suporte", value: "Problemas técnicos, bugs ou ajuda geral.", inline: false },
         { name: " <:ateno:690049748778090499> Denúncia", value: "Reporte jogadores ou situações irregulares.", inline: false },
-        { name: " <:emoji_76:1275944533288554506> Dúvidas", value: "Perguntas sobre o servidor ou funcionamento.", inline: false }
+        { name: " <:emoji_76:1275944533288554506> Dúvidas", value: "Perguntas sobre o servidor ou funcionamento.", inline: false },
+       { name: " <:emoji_24:1076816673220341842> Compras", value: "Atendimento relacionado a compras.", inline: false }
     )
     .setColor("#2b6cff")
 .setImage("https://cdn.discordapp.com/attachments/1415896639540826173/1501719310882832546/file_00000000c78c71f5b0e80a79cd7a8a88.png?ex=69fd1898&is=69fbc718&hm=e110a0f1404eee237b42a605975c1807fa7161feb687a4f568214a552c1f8fd0&")
@@ -247,7 +248,15 @@ client.on('messageCreate', async message => {
                         emoji: {id:
 "1275944533288554506"}
                         
-                    }
+                    },
+                    {
+                       
+                       label: 'Compras',
+                       value: 'compras',
+                       description: 'Abrir ticket de compras',
+                       emoji: { id: "1076816673220341842" }
+}
+
                 ])
         );
 
