@@ -93,6 +93,21 @@ client.on('interactionCreate', async interaction => {
                 createdAt: new Date()
             };
 
+            let categoriaID = TICKET_CATEGORY_ID;
+let cargosPermitidos = [STAFF_ROLE_ID];
+
+if (tipo === 'compras') {
+    categoriaID = "1501898943095902330";
+
+    cargosPermitidos = [
+        STAFF_ROLE_ID,
+        "1415896413086158969",
+        "975965906733785128",
+        "1425157098085552260",
+        "1500929147952959641"
+    ];
+}
+
             const canal = await interaction.guild.channels.create({
                 name: `ticket-${interaction.user.username}`,
                 type: ChannelType.GuildText,
