@@ -111,7 +111,7 @@ if (tipo === 'compras') {
             const canal = await interaction.guild.channels.create({
                 name: `ticket-${interaction.user.username}`,
                 type: ChannelType.GuildText,
-                parent: TICKET_CATEGORY_ID,
+                parent: categoriaID,
                 permissionOverwrites: [
                     {
                         id: interaction.guild.id,
@@ -125,13 +125,13 @@ if (tipo === 'compras') {
                             PermissionFlagsBits.SendMessages
                         ],
                     },
-                    {
-                        id: STAFF_ROLE_ID,
-                        allow: [
-                            PermissionFlagsBits.ViewChannel,
-                            PermissionFlagsBits.SendMessages
-                        ],
-                    }
+                    ...cargosPermitidos.map(cargo => ({
+    id: cargo,
+    allow: [
+        PermissionFlagsBits.ViewChannel,
+        PermissionFlagsBits.SendMessages
+    ],
+})),
                 ],
             });
 
@@ -153,7 +153,7 @@ if (tipo === 'compras') {
             );
 
             await canal.send({
-                content: `${interaction.user} <@&${STAFF_ROLE_ID}>`,
+                content: `${interaction.user} ${cargosPermitidos.map(id => `<@&${id}>`).join(' ')}`,
                 embeds: [embed],
                 components: [botoes]
             });
