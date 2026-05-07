@@ -133,7 +133,7 @@ if (tipo === 'compras') {
         ],
     })),
 ],
-}));
+});
 
             canal.ticketData = ticketData;
 
