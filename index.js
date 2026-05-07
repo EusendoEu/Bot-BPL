@@ -79,10 +79,11 @@ client.on('interactionCreate', async interaction => {
         if (interaction.customId === 'ticket_menu') {
             const tipo = interaction.values[0];
             const motivos = {
-                suporte: "<:Manutencao:797161188965220394> Suporte",
-                denuncia: "<:ateno:690049748778090499> Denúncia",
-                duvida: "<:emoji_76:1275944533288554506> Dúvidas"
-            };
+    suporte: "<:Manutencao:797161188965220394> Suporte",
+    denuncia: "<:ateno:690049748778090499> Denúncia",
+    duvida: "<:emoji_76:1275944533288554506> Dúvidas",
+    compras: "<:emoji_24:1076816673220341842> Compras"
+};
 
             const motivoFormatado = motivos[tipo] || tipo;
 
