@@ -113,27 +113,26 @@ if (tipo === 'compras') {
                 type: ChannelType.GuildText,
                 parent: categoriaID,
                 permissionOverwrites: [
-                    {
-                        id: interaction.guild.id,
-                        deny: [PermissionFlagsBits.ViewChannel],
-                    },
-                    {
-                        id: interaction.user.id,
-                        allow: [
-                            PermissionFlagsBits.ViewChannel,
-                            PermissionFlagsBits.ManageChannels,
-                            PermissionFlagsBits.SendMessages
-                        ],
-                    },
-                    ...cargosPermitidos.map(cargo => ({
-    id: cargo,
-    allow: [
-        PermissionFlagsBits.ViewChannel,
-        PermissionFlagsBits.SendMessages
-    ],
-})),
-                ],
-            });
+    {
+        id: interaction.guild.id,
+        deny: [PermissionFlagsBits.ViewChannel],
+    },
+    {
+        id: interaction.user.id,
+        allow: [
+            PermissionFlagsBits.ViewChannel,
+            PermissionFlagsBits.ManageChannels,
+            PermissionFlagsBits.SendMessages
+        ],
+    },
+    ...cargosPermitidos.map(cargo => ({
+        id: cargo,
+        allow: [
+            PermissionFlagsBits.ViewChannel,
+            PermissionFlagsBits.SendMessages
+        ],
+    })),
+],
 
             canal.ticketData = ticketData;
 
