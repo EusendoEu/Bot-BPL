@@ -23,7 +23,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setTitle('📚 Central de Comandos')
-            .setDescription('Lista de comandos disponíveis do bot.')
+            .setDescription('🔷 Lista de comandos disponíveis no Brasil Play Life vBlue 🔷.')
             .addFields(
                 {
                     name: '🎫 Tickets',
