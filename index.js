@@ -74,6 +74,27 @@ client.once('ready', () => {
 // ===== INTERAÇÕES =====
 client.on('interactionCreate', async interaction => {
 
+    // ===== SLASH COMMANDS =====
+    if (interaction.isChatInputCommand()) {
+
+        const command = client.commands.get(interaction.commandName);
+
+        if (!command) return;
+
+        try {
+            await command.execute(interaction);
+        } catch (error) {
+            console.error(error);
+
+            await interaction.reply({
+                content: '❌ Erro ao executar comando.',
+                ephemeral: true
+            });
+        }
+
+        return;
+    }
+
     // ===== SELECT MENU (CRIAR TICKET) =====
     if (interaction.isStringSelectMenu()) {
         if (interaction.customId === 'ticket_menu') {
