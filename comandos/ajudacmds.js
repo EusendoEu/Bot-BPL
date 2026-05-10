@@ -6,7 +6,7 @@ const {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ajudacmds')
-        .setDescription('Mostra todos os comandos do bot'),
+        .setDescription('Mostra todos os comandos disponíveis do BOT'),
 
     async execute(interaction) {
 
