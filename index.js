@@ -315,6 +315,64 @@ client.on('messageCreate', async message => {
         });
     }
 
+// ==== COMANDO !expulsar ==== //
+if (command === "expulsar") {
+
+    // ID do usuário permitido
+    const usuarioPermitido = '1260366223800012932';
+
+    // Verificação
+    if (message.author.id !== usuarioPermitido) {
+        return message.reply("❌ Você não possui permissão.");
+    }
+
+    // Verifica menção
+    const membro = message.mentions.members.first();
+
+    if (!membro) {
+        return message.reply("❌ Mencione um usuário para expulsar.");
+    }
+
+    // Motivo
+    const motivo = args.slice(1).join(" ") || "Nenhum motivo informado";
+
+    // Verifica permissão do bot
+    if (!membro.kickable) {
+        return message.reply("❌ Não consigo expulsar este usuário.");
+    }
+
+    // Expulsar
+    await membro.kick(motivo);
+
+    const embed = new EmbedBuilder()
+        .setTitle("👢 Usuário Expulso")
+        .addFields(
+            {
+                name: "👤 Usuário",
+                value: `${membro.user.tag}`,
+                inline: true
+            },
+            {
+                name: "🛡️ Expulso por",
+                value: `${message.author.tag}`,
+                inline: true
+            },
+            {
+                name: "📌 Motivo",
+                value: motivo,
+                inline: false
+            }
+        )
+        .setColor("#ff0000")
+        .setTimestamp();
+
+    message.channel.send({
+        embeds: [embed]
+    });
+}
+
+
+
 // ==== COMANDO !imformações ====//
 if (command === "informacoes") {
 
