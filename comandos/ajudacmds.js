@@ -11,7 +11,7 @@ module.exports = {
     async execute(interaction) {
 
         // Usuário permitido
-        const usuarioPermitido = '1260366223800012932';
+        const usuarioPermitido = '1260366223800012931';
 
         // Verificação
         if (interaction.user.id !== usuarioPermitido) {
