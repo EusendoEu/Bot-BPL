@@ -54,6 +54,7 @@ const PREFIX = ".";
 const PONTO_PAINEL_CHANNEL_ID = "1416591827678658580";
 const PONTO_LOG_CHANNEL_ID = "1426962374903992491";
 const PONTO_CATEGORY_ID = "1503511546368757923";
+const STAFF_PONTO_ROLE_ID = "1415896418765242492";
 
 const pontos = new Map();
 
@@ -246,11 +247,12 @@ if (interaction.customId === "iniciar_ponto") {
     const inicio = Date.now();
 
     pontos.set(interaction.user.id, {
-        inicio,
-        pausado: false,
-        tempoPausado: 0,
-        pausaInicio: null
-    });
+    dono: interaction.user.id,
+    inicio,
+    pausado: false,
+    tempoPausado: 0,
+    pausaInicio: null
+});
 
     const embed = new EmbedBuilder()
         .setTitle("📋 BATE PONTO")
