@@ -285,7 +285,6 @@ if (interaction.customId === "iniciar_ponto") {
         value: `<t:${Math.floor(inicio / 1000)}:F>`,
         inline: false
     }
-)
         )
         .setColor("Green");
 
