@@ -259,12 +259,12 @@ if (interaction.customId === "iniciar_ponto") {
     {
         name: "👤 Usuário",
         value: `${interaction.user}`,
-        inline: true
+        inline: falss
     },
     {
         name: "📌 Status",
         value: "🟢 Aberto",
-        inline: true
+        inline: false
     },
     {
         name: "⏰ Iniciado em",
