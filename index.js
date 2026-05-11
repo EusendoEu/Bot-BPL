@@ -209,6 +209,100 @@ if (ticketsAbertos.size >= 2) {
 
     // ===== BOTÃO FECHAR =====
     if (interaction.isButton()) {
+
+     // ===== INICIAR PONTO =====
+if (interaction.customId === "iniciar_ponto") {
+
+    const canalExistente = interaction.guild.channels.cache.find(
+        c => c.name === `ponto-${interaction.user.username.toLowerCase()}`
+    );
+
+    if (canalExistente) {
+        return interaction.reply({
+            content: "❌ Você já possui um ponto aberto.",
+            ephemeral: true
+        });
+    }
+
+    const canal = await interaction.guild.channels.create({
+        name: `ponto-${interaction.user.username}`,
+        type: ChannelType.GuildText,
+        parent: PONTO_CATEGORY_ID,
+        permissionOverwrites: [
+            {
+                id: interaction.guild.id,
+                deny: [PermissionFlagsBits.ViewChannel]
+            },
+            {
+                id: interaction.user.id,
+                allow: [
+                    PermissionFlagsBits.ViewChannel,
+                    PermissionFlagsBits.SendMessages
+                ]
+            }
+        ]
+    });
+
+    const inicio = Date.now();
+
+    pontos.set(interaction.user.id, {
+        inicio,
+        pausado: false,
+        tempoPausado: 0,
+        pausaInicio: null
+    });
+
+    const embed = new EmbedBuilder()
+        .setTitle("📋 BATE PONTO")
+        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .addFields(
+            {
+                name: "👤 Usuário",
+                value: `${interaction.user}`,
+                inline: false
+            },
+            {
+                name: "📌 Status",
+                value: "🟢 Aberto",
+                inline: false
+            },
+            {
+                name: "⏰ Iniciado em",
+                value: `<t:${Math.floor(inicio / 1000)}:F>`,
+                inline: false
+            }
+        )
+        .setColor("Green");
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId("pausar_ponto")
+            .setLabel("Pausar")
+            .setStyle(ButtonStyle.Secondary),
+
+        new ButtonBuilder()
+            .setCustomId("voltar_ponto")
+            .setLabel("Voltar")
+            .setStyle(ButtonStyle.Success),
+
+        new ButtonBuilder()
+            .setCustomId("fechar_ponto")
+            .setLabel("Fechar")
+            .setStyle(ButtonStyle.Danger)
+    );
+
+    await canal.send({
+        content: `${interaction.user}`,
+        embeds: [embed],
+        components: [row]
+    });
+
+    interaction.reply({
+        content: `✅ Seu ponto foi iniciado em ${canal}`,
+        ephemeral: true
+    });
+}
+
         if (interaction.customId === 'fechar_ticket') {
             if (!interaction.member.roles.cache.has(STAFF_ROLE_ID)) {
                 return interaction.reply({
