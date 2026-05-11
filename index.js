@@ -256,21 +256,36 @@ if (interaction.customId === "iniciar_ponto") {
         .setTitle("📋 BATE PONTO")
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
         .addFields(
-            {
-                name: "👤 Usuário",
-                value: `${interaction.user}`,
-                inline: false
-            },
-            {
-                name: "📌 Status",
-                value: "🟢 Aberto",
-                inline: false
-            },
-            {
-                name: "⏰ Iniciado em",
-                value: `<t:${Math.floor(inicio / 1000)}:F>`,
-                inline: false
-            }
+    {
+        name: "👤 Usuário",
+        value: `${interaction.user}`,
+        inline: false
+    },
+
+    {
+        name: "⠀",
+        value: "⠀",
+        inline: false
+    },
+
+    {
+        name: "📌 Status",
+        value: "🟢 Aberto",
+        inline: false
+    },
+
+    {
+        name: "⠀",
+        value: "⠀",
+        inline: false
+    },
+
+    {
+        name: "⏰ Iniciado em",
+        value: `<t:${Math.floor(inicio / 1000)}:F>`,
+        inline: false
+    }
+)
         )
         .setColor("Green");
 
