@@ -303,6 +303,119 @@ if (interaction.customId === "iniciar_ponto") {
     });
 }
 
+// ===== PAUSAR =====
+if (interaction.customId === "pausar_ponto") {
+
+    const data = pontos.get(interaction.user.id);
+
+    if (!data) return;
+
+    data.pausado = true;
+    data.pausaInicio = Date.now();
+
+    const embed = EmbedBuilder.from(interaction.message.embeds[0]);
+
+    embed.spliceFields(1, 1, {
+        name: "📌 Status",
+        value: "🟡 Pausado",
+        inline: false
+    });
+
+    embed.setColor("Yellow");
+
+    await interaction.update({
+        embeds: [embed]
+    });
+}
+
+// ===== VOLTAR =====
+if (interaction.customId === "voltar_ponto") {
+
+    const data = pontos.get(interaction.user.id);
+
+    if (!data) return;
+
+    if (data.pausado && data.pausaInicio) {
+        data.tempoPausado += Date.now() - data.pausaInicio;
+    }
+
+    data.pausado = false;
+    data.pausaInicio = null;
+
+    const embed = EmbedBuilder.from(interaction.message.embeds[0]);
+
+    embed.spliceFields(1, 1, {
+        name: "📌 Status",
+        value: "🟢 Aberto",
+        inline: false
+    });
+
+    embed.setColor("Green");
+
+    await interaction.update({
+        embeds: [embed]
+    });
+}
+
+// ===== FECHAR =====
+if (interaction.customId === "fechar_ponto") {
+
+    const data = pontos.get(interaction.user.id);
+
+    if (!data) {
+        return interaction.reply({
+            content: "❌ Nenhum ponto encontrado.",
+            ephemeral: true
+        });
+    }
+
+    let tempoFinal = Date.now() - data.inicio - data.tempoPausado;
+
+    if (data.pausado && data.pausaInicio) {
+        tempoFinal -= (Date.now() - data.pausaInicio);
+    }
+
+    const horas = Math.floor(tempoFinal / 3600000);
+    const minutos = Math.floor((tempoFinal % 3600000) / 60000);
+
+    const logEmbed = new EmbedBuilder()
+        .setTitle("📋 LOG DE PONTO")
+        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .addFields(
+            {
+                name: "👤 Usuário",
+                value: `${interaction.user.tag}`,
+                inline: false
+            },
+            {
+                name: "⏰ Tempo Total",
+                value: `${horas}h ${minutos}m`,
+                inline: false
+            }
+        )
+        .setColor("Red")
+        .setTimestamp();
+
+    const logs = client.channels.cache.get(PONTO_LOG_CHANNEL_ID);
+
+    if (logs) {
+        logs.send({
+            embeds: [logEmbed]
+        });
+    }
+
+    pontos.delete(interaction.user.id);
+
+    await interaction.reply({
+        content: "🔴 Ponto encerrado.",
+        ephemeral: true
+    });
+
+    setTimeout(() => {
+        interaction.channel.delete().catch(() => {});
+    }, 3000);
+}
+
         if (interaction.customId === 'fechar_ticket') {
             if (!interaction.member.roles.cache.has(STAFF_ROLE_ID)) {
                 return interaction.reply({
