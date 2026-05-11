@@ -259,7 +259,7 @@ if (interaction.customId === "iniciar_ponto") {
     {
         name: "👤 Usuário",
         value: `${interaction.user}`,
-        inline: falss
+        inline: false
     },
     {
         name: "📌 Status",
