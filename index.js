@@ -259,32 +259,19 @@ if (interaction.customId === "iniciar_ponto") {
     {
         name: "👤 Usuário",
         value: `${interaction.user}`,
-        inline: false
+        inline: true
     },
-
-    {
-        name: "⠀",
-        value: "⠀",
-        inline: false
-    },
-
     {
         name: "📌 Status",
         value: "🟢 Aberto",
-        inline: false
+        inline: true
     },
-
-    {
-        name: "⠀",
-        value: "⠀",
-        inline: false
-    },
-
     {
         name: "⏰ Iniciado em",
         value: `<t:${Math.floor(inicio / 1000)}:F>`,
         inline: false
     }
+)
         )
         .setColor("Green");
 
