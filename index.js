@@ -730,7 +730,7 @@ const embed = new EmbedBuilder()
         }
     )
 
-    .setImage("https://cdn.discordapp.com/attachments/1415896639540826173/1501719310882832546/file_00000000c78c71f5b0e80a79cd7a8a88.png")
+    .setImage("https://cdn.discordapp.com/attachments/1416591770111971421/1503528600270278868/b8e1afe848fd1b4c0e4b6c5b974818870112641d7121a2342aedb22ec9afcddd.png?ex=6a03ada0&is=6a025c20&hm=6d829620cbd3a022d31593b2b9efbaff7be876de05251306d3b9c6216d0e7cde&")
 
     .setFooter({
         text: "Brasil Play Life • Staff System"
