@@ -222,7 +222,7 @@ if (ticketsAbertos.size >= 2) {
                 )
                 .setColor("#ff0000")
                 .setFooter({
-                    text: `Aberto em: $.      {ticket?.createdAt?.toLocaleString('pt-BR', {
+                    text: `Aberto em: $.{ticket?.createdAt?.toLocaleString('pt-BR', {
     timeZone: 'America/Sao_Paulo'
 }) || "?"}`
    });
