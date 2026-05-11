@@ -436,7 +436,7 @@ if (interaction.user.id !== data.dono && !temCargo) {
         .addFields(
             {
                 name: "👤 Usuário",
-                value: `${interaction.user.tag}`,
+                value: `${membro.user.tag}`,
                 inline: false
             },
             {
