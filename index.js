@@ -225,7 +225,7 @@ if (ticketsAbertos.size >= 2) {
     text: `Aberto em: ${ticket?.createdAt?.toLocaleString('pt-BR', {
         timeZone: 'America/Sao_Paulo'
     }) || "?"}`
-  });
+});
 
             const logChannel = interaction.guild.channels.cache.get(TICKET_LOG_CHANNEL_ID);
 
