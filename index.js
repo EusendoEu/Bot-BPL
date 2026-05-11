@@ -691,14 +691,52 @@ Temos o prazer de apresentar a **Comunidade Brasil Play Life**, uma rede de serv
 // ==== COMANDO .painelponto ==== //
 if (command === "painelponto") {
 
-    const embed = new EmbedBuilder()
-        .setTitle("📋 Bate Ponto Staff")
-        .setDescription(
-`Sistema oficial de bate ponto da staff Brasil Play Life vBlue.
+    
+const embed = new EmbedBuilder()
+    .setColor("#2b6cff")
 
-Clique no botão abaixo para iniciar seu ponto.`
-        )
-        .setColor("#2b6cff");
+    .setAuthor({
+        name: "Brasil Play Life vBlue",
+        iconURL: client.user.displayAvatarURL()
+    })
+
+    .setTitle("📋 Central de Bate Ponto")
+
+    .setDescription(
+`> Sistema oficial de controle de expediente da staff.
+
+━━━━━━━━━━━━━━━━━━
+🟢 **Iniciar expediente**
+🟡 **Pausar expediente**
+🔴 **Finalizar expediente**
+━━━━━━━━━━━━━━━━━━
+
+📌 Utilize este painel para registrar seu horário de trabalho na staff.
+
+⏰ **Tempo mínimo obrigatório:** \`2 horas\`
+🚨 **Quando estiver com ponto aberto esteja em call**
+🔒 **Sistema privado e individual**
+`
+    )
+
+    .addFields(
+        {
+            name: "📢 Informações",
+            value:
+`• Não abra mais de um ponto.
+• Utilize pausas apenas quando necessário.
+• Ao finalizar, seu horário será registrado automaticamente.`,
+            inline: false
+        }
+    )
+
+    .setImage("https://cdn.discordapp.com/attachments/1415896639540826173/1501719310882832546/file_00000000c78c71f5b0e80a79cd7a8a88.png")
+
+    .setFooter({
+        text: "Brasil Play Life • Staff System"
+    })
+
+    .setTimestamp();
 
     const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
