@@ -321,11 +321,7 @@ if (command === "expulsar") {
     // ID do usuário permitido
     const cargoPermitido = '1415896418765242492';
 
-if (!interaction.member.roles.cache.has(cargoPermitido)) {
-    return interaction.reply({
-        content: '❌ Você não possui permissão para usar este comando.',
-        ephemeral: true
-    });
+if (message.author.id !== cargoPermitido) {return message.reply("❌ Você não possuí permissão para usar o comando.");
 }
 
     // Verifica menção
