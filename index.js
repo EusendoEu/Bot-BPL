@@ -394,7 +394,16 @@ const data = pontos.get(membro.user.id);
 // ===== FECHAR =====
 if (interaction.customId === "fechar_ponto") {
 
-    const data = pontos.get(interaction.user.id);
+  const usuarioCanal = interaction.channel.name
+    .replace("ponto-", "");
+
+const membro = interaction.guild.members.cache.find(
+    m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
+);
+
+if (!membro) return;
+
+const data = pontos.get(membro.user.id);
 
     if (!data) {
         return interaction.reply({
@@ -402,6 +411,15 @@ if (interaction.customId === "fechar_ponto") {
             ephemeral: true
         });
     }
+
+const temCargo = interaction.member.roles.cache.has(STAFF_PONTO_ROLE_ID);
+
+if (interaction.user.id !== data.dono && !temCargo) {
+    return interaction.reply({
+        content: "❌ Você não tem permissão para fechar este ponto.",
+        ephemeral: true
+    });
+}
 
     let tempoFinal = Date.now() - data.inicio - data.tempoPausado;
 
@@ -438,7 +456,7 @@ if (interaction.customId === "fechar_ponto") {
         });
     }
 
-    pontos.delete(interaction.user.id);
+    pontos.delete(membro.user.id);
 
     await interaction.reply({
         content: "🔴 Ponto encerrado.",
