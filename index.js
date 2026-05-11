@@ -319,12 +319,14 @@ client.on('messageCreate', async message => {
 if (command === "expulsar") {
 
     // ID do usuário permitido
-    const usuarioPermitido = '1260366223800012932';
+    const cargoPermitido = '1415896418765242492';
 
-    // Verificação
-    if (message.author.id !== usuarioPermitido) {
-        return message.reply("❌ Você não possui permissão.");
-    }
+if (!interaction.member.roles.cache.has(cargoPermitido)) {
+    return interaction.reply({
+        content: '❌ Você não possui permissão para usar este comando.',
+        ephemeral: true
+    });
+}
 
     // Verifica menção
     const membro = message.mentions.members.first();
