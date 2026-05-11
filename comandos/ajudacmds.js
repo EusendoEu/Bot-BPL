@@ -27,15 +27,20 @@ if (!interaction.member.roles.cache.has(cargoPermitido)) {
                 {
                     name: '🎫 Tickets',
                     value:
-                    '`!painel` → Envia o painel de tickets',
+                    '`.painel` → Envia o painel de tickets',
+                    inline: false
+                },
+                    name: '⚙️ Moderação',
+                    value:
+                    '`.expulsar` → Expulsa o usuário mencionado do servidor',
                     inline: false
                 },
                 {
                     name: '📌 Informações',
                     value:
-                    '`!informacoes` → Informações do servidor\n' +
-                    '`!conexao` → IP do servidor\n' +
-                    '`!comunidade` → Comunidade oficial',
+                    '`.informacoes` → Informações do servidor\n' +
+                    '`.conexao` → IP do servidor\n' +
+                    '`.comunidade` → Comunidade oficial',
                     inline: false
                 }
             )
