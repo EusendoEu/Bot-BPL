@@ -755,7 +755,7 @@ const embed = new EmbedBuilder()
 }
 
 
-
+});
 
 
 client.login(process.env.TOKEN_BOT);
