@@ -49,6 +49,14 @@ const TICKET_CATEGORY_ID =
 const TICKET_LOG_CHANNEL_ID = "1417575216296755220";
 const STAFF_ROLE_ID = "1415898654518284339"; // <-- cargo que pode fechar
 const PREFIX = ".";
+
+// ===== BATE PONTO =====
+const PONTO_PAINEL_CHANNEL_ID = "1416591827678658580";
+const PONTO_LOG_CHANNEL_ID = "1426962374903992491";
+const PONTO_CATEGORY_ID = "1503511546368757923";
+
+const pontos = new Map();
+
 // ==================
 
 // carregar comandos
