@@ -742,6 +742,7 @@ const embed = new EmbedBuilder()
         new ButtonBuilder()
             .setCustomId("iniciar_ponto")
             .setLabel("Iniciar Ponto")
+            .setEmoji("132074109390")
             .setStyle(ButtonStyle.Success)
     );
 
