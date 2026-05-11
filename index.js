@@ -48,7 +48,7 @@ const TICKET_CATEGORY_ID =
 "1440707415166288024";
 const TICKET_LOG_CHANNEL_ID = "1417575216296755220";
 const STAFF_ROLE_ID = "1415898654518284339"; // <-- cargo que pode fechar
-const PREFIX = "!";
+const PREFIX = ".";
 // ==================
 
 // carregar comandos
