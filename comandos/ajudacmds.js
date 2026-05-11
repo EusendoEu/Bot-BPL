@@ -11,7 +11,7 @@ module.exports = {
     async execute(interaction) {
 
         // Cargo permitido
-     const cargoPermitido = '1415896418765242491';
+     const cargoPermitido = '1415896418765242492';
 
 if (!interaction.member.roles.cache.has(cargoPermitido)) {
     return interaction.reply({
