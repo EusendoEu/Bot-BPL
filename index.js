@@ -308,9 +308,25 @@ if (interaction.customId === "iniciar_ponto") {
 // ===== PAUSAR =====
 if (interaction.customId === "pausar_ponto") {
 
-    const data = pontos.get(interaction.user.id);
+    const usuarioCanal = interaction.channel.name
+    .replace("ponto-", "");
+
+const membro = interaction.guild.members.cache.find(
+    m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
+);
+
+if (!membro) return;
+
+const data = pontos.get(membro.user.id);
 
     if (!data) return;
+   
+    if (interaction.user.id !== data.dono) {
+    return interaction.reply({
+        content: "❌ Esse ponto não é seu.",
+        ephemeral: true
+    });
+}
 
     data.pausado = true;
     data.pausaInicio = Date.now();
@@ -333,9 +349,25 @@ if (interaction.customId === "pausar_ponto") {
 // ===== VOLTAR =====
 if (interaction.customId === "voltar_ponto") {
 
-    const data = pontos.get(interaction.user.id);
+    const usuarioCanal = interaction.channel.name
+    .replace("ponto-", "");
+
+const membro = interaction.guild.members.cache.find(
+    m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
+);
+
+if (!membro) return;
+
+const data = pontos.get(membro.user.id);
 
     if (!data) return;
+
+    if (interaction.user.id !== data.dono) {
+    return interaction.reply({
+        content: "❌ Esse ponto não é seu.",
+        ephemeral: true
+    });
+}
 
     if (data.pausado && data.pausaInicio) {
         data.tempoPausado += Date.now() - data.pausaInicio;
