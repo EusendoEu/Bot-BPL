@@ -10,16 +10,15 @@ module.exports = {
 
     async execute(interaction) {
 
-        // Usuário permitido
-        const usuarioPermitido = '1260366223800012932';
+        // Cargo permitido
+     const cargoPermitido = '1415896418765242491';
 
-        // Verificação
-        if (interaction.user.id !== usuarioPermitido) {
-            return interaction.reply({
-                content: '❌ Você não possui permissão para usar este comando.',
-                ephemeral: true
-            });
-        }
+if (!interaction.member.roles.cache.has(cargoPermitido)) {
+    return interaction.reply({
+        content: '❌ Você não possui permissão para usar este comando.',
+        ephemeral: true
+    });
+}
 
         const embed = new EmbedBuilder()
             .setTitle('📚 Central de Comandos')
