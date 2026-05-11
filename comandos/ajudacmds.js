@@ -30,6 +30,7 @@ if (!interaction.member.roles.cache.has(cargoPermitido)) {
                     '`.painel` → Envia o painel de tickets',
                     inline: false
                 },
+                {
                     name: '⚙️ Moderação',
                     value:
                     '`.expulsar` → Expulsa o usuário mencionado do servidor',
