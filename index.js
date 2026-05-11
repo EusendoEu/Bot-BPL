@@ -480,6 +480,34 @@ Temos o prazer de apresentar a **Comunidade Brasil Play Life**, uma rede de serv
     message.channel.send({ embeds: [embed] });
 }
 
+
+// ==== COMANDO .painelponto ==== //
+if (command === "painelponto") {
+
+    const embed = new EmbedBuilder()
+        .setTitle("📋 Bate Ponto Staff")
+        .setDescription(
+`Sistema oficial de bate ponto da staff Brasil Play Life vBlue.
+
+Clique no botão abaixo para iniciar seu ponto.`
+        )
+        .setColor("#2b6cff");
+
+    const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+            .setCustomId("iniciar_ponto")
+            .setLabel("Iniciar Ponto")
+            .setStyle(ButtonStyle.Success)
+    );
+
+    const canal = client.channels.cache.get(PONTO_PAINEL_CHANNEL_ID);
+
+    canal.send({
+        embeds: [embed],
+        components: [row]
+    });
+}
+
     
 });
 
