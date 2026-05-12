@@ -711,6 +711,15 @@ async function fecharPonto(interaction, membro, data, motivo = null) {
     const horas = Math.floor(tempoFinal / 3600000);
     const minutos = Math.floor((tempoFinal % 3600000) / 60000);
 
+const tempoRanking = rankingHoras.get(membro.user.id) || 0;
+
+rankingHoras.set(
+    membro.user.id,
+    tempoRanking + tempoFinal
+);
+
+salvarRanking();
+
     const logEmbed = new EmbedBuilder()
         .setTitle("📋 LOG DE PONTO")
         .setThumbnail(membro.user.displayAvatarURL({ dynamic: true }))
