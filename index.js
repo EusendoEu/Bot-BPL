@@ -1170,7 +1170,4 @@ const command = args.shift().toLowerCase();
 });
 
 
-});
-
-
 client.login(process.env.TOKEN_BOT);
