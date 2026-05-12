@@ -25,9 +25,10 @@ if (!interaction.member.roles.cache.has(cargoPermitido)) {
             .setDescription('🔷 Lista de comandos disponíveis no Brasil Play Life vBlue 🔷.')
             .addFields(
                 {
-                    name: '🎫 Tickets',
+                    name: '📋 Painéis',
                     value:
                     '`.painel` → Envia o painel de tickets',
+                    '`.painelponto` → Envia o painel de ponto, só pode ser usado no canal de bater cartão',
                     inline: false
                 },
                 {
