@@ -28,9 +28,11 @@ const {
     StringSelectMenuBuilder,
     ButtonBuilder,
     ButtonStyle,
-    ActivityType
+    ActivityType,
+    ModalBuilder,
+    TextInputBuilder,
+    TextInputStyle
 } = require('discord.js');
-
 const fs = require('fs');
 
 const client = new Client({
