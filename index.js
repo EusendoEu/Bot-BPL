@@ -536,6 +536,15 @@ await canal.send({
     const horas = Math.floor(tempoAtual / 3600000);
     const minutos = Math.floor((tempoAtual % 3600000) / 60000);
 
+const tempoAtual = rankingHoras.get(membro.user.id) || 0;
+
+rankingHoras.set(
+    membro.user.id,
+    tempoAtual + tempoFinal
+);
+
+salvarRanking();
+
     const tempoFormatado =
         `${String(horas).padStart(2, "0")}:${String(minutos).padStart(2, "0")}`;
 
