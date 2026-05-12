@@ -489,6 +489,8 @@ if (interaction.user.id !== data.dono && !temCargo) {
     });
 }
 
+        async function fecharPonto(interaction, membro, data, motivo = null) {
+
     let tempoFinal = Date.now() - data.inicio - data.tempoPausado;
 
     if (data.pausado && data.pausaInicio) {
@@ -500,7 +502,7 @@ if (interaction.user.id !== data.dono && !temCargo) {
 
     const logEmbed = new EmbedBuilder()
         .setTitle("📋 LOG DE PONTO")
-        .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
+        .setThumbnail(membro.user.displayAvatarURL({ dynamic: true }))
         .addFields(
             {
                 name: "👤 Usuário",
@@ -511,12 +513,26 @@ if (interaction.user.id !== data.dono && !temCargo) {
                 name: "⏰ Tempo Total",
                 value: `${horas}h ${minutos}m`,
                 inline: false
+            },
+            {
+                name: "🔒 Fechado por",
+                value: `${interaction.user.tag}`,
+                inline: false
             }
         )
         .setColor("Red")
         .setTimestamp();
 
-    const logs = client.channels.cache.get(PONTO_LOG_CHANNEL_ID);
+    // Só adiciona motivo se alguém da staff fechou
+    if (motivo) {
+        logEmbed.addFields({
+            name: "📌 Motivo",
+            value: motivo,
+            inline: false
+        });
+    }
+
+    const logs = interaction.guild.channels.cache.get(PONTO_LOG_CHANNEL_ID);
 
     if (logs) {
         logs.send({
@@ -535,6 +551,7 @@ if (interaction.user.id !== data.dono && !temCargo) {
         interaction.channel.delete().catch(() => {});
     }, 3000);
 }
+
 
         if (interaction.customId === 'fechar_ticket') {
             if (!interaction.member.roles.cache.has(STAFF_ROLE_ID)) {
