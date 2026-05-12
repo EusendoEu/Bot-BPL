@@ -63,6 +63,31 @@ const CALL_TRABALHO_ID = "1416597294035374172";
 const pontos = new Map();
 const intervalosPonto = new Map();
 
+const PONTOS_FILE = "./pontos.json";
+
+function salvarPontos() {
+
+    const dados = Object.fromEntries(pontos);
+
+    fs.writeFileSync(
+        PONTOS_FILE,
+        JSON.stringify(dados, null, 2)
+    );
+}
+
+function carregarPontos() {
+
+    if (!fs.existsSync(PONTOS_FILE)) return;
+
+    const dados = JSON.parse(
+        fs.readFileSync(PONTOS_FILE)
+    );
+
+    for (const [id, data] of Object.entries(dados)) {
+        pontos.set(id, data);
+    }
+}
+
 // ==================
 
 // carregar comandos
@@ -72,6 +97,7 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 client.once('ready', () => {
+    carregarPontos();
     console.log(`Bot online como ${client.user.tag}`);
 
     client.user.setPresence({
