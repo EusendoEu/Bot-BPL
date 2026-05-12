@@ -59,6 +59,7 @@ const PONTO_CATEGORY_ID = "1503511546368757923";
 const STAFF_PONTO_ROLE_ID = "1415896418765242492";
 
 const pontos = new Map();
+const intervalosPonto = new Map();
 
 // ==================
 
@@ -293,23 +294,28 @@ if (interaction.customId === "iniciar_ponto") {
     const embed = new EmbedBuilder()
         .setTitle("📋 BATE PONTO")
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
-        .addFields(
-    {
-        name: "👤 Usuário",
-        value: `${interaction.user}`,
-        inline: false
-    },
-    {
-        name: "📌 Status",
-        value: "🟢 Aberto",
-        inline: false
-    },
-    {
-        name: "⏰ Iniciado em",
-        value: `<t:${Math.floor(inicio / 1000)}:F>`,
-        inline: false
-    }
-        )
+       .addFields(
+{
+    name: "👤 Usuário",
+    value: `${interaction.user}`,
+    inline: false
+},
+{
+    name: "📌 Status",
+    value: "🟢 Aberto",
+    inline: false
+},
+{
+    name: "⏳ Horas em atividade",
+    value: "00:00",
+    inline: false
+},
+{
+    name: "⏰ Iniciado em",
+    value: `<t:${Math.floor(inicio / 1000)}:F>`,
+    inline: false
+}
+)
         .setColor("Green");
 
     const row = new ActionRowBuilder().addComponents(
