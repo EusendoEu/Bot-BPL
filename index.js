@@ -1119,11 +1119,9 @@ const embed = new EmbedBuilder()
 }
 
 
-client.on("messageCreate", async message => {
+     // ==== .Ranking ==== //
 
-    if (message.author.bot) return;
-
-    if (message.content === ".ranking") {
+      if (command === "ranking") {
 
         if (rankingHoras.size === 0) {
             return message.reply("❌ Ninguém possui horas registradas.");
