@@ -394,16 +394,16 @@ const data = pontos.get(membro.user.id);
 // ===== FECHAR =====
 if (interaction.customId === "fechar_ponto") {
 
-  const usuarioCanal = interaction.channel.name
-    .replace("ponto-", "");
+    const usuarioCanal = interaction.channel.name
+        .replace("ponto-", "");
 
-const membro = interaction.guild.members.cache.find(
-    m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
-);
+    const membro = interaction.guild.members.cache.find(
+        m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
+    );
 
-if (!membro) return;
+    if (!membro) return;
 
-const data = pontos.get(membro.user.id);
+    const data = pontos.get(membro.user.id);
 
     if (!data) {
         return interaction.reply({
@@ -411,6 +411,40 @@ const data = pontos.get(membro.user.id);
             ephemeral: true
         });
     }
+
+    const temCargo = interaction.member.roles.cache.has(STAFF_PONTO_ROLE_ID);
+
+    // Sem permissão
+    if (interaction.user.id !== data.dono && !temCargo) {
+        return interaction.reply({
+            content: "❌ Você não tem permissão para fechar este ponto.",
+            ephemeral: true
+        });
+    }
+
+    // Se for o próprio usuário fechando
+    if (interaction.user.id === data.dono) {
+        return fecharPonto(interaction, membro, data, null);
+    }
+
+    // STAFF fechando ponto de outro
+    const modal = new ModalBuilder()
+        .setCustomId(`motivo_fechamento_${membro.user.id}`)
+        .setTitle("Fechar ponto");
+
+    const motivoInput = new TextInputBuilder()
+        .setCustomId("motivo")
+        .setLabel("Qual motivo do fechamento?")
+        .setPlaceholder("Ex: Farmando hora")
+        .setStyle(TextInputStyle.Paragraph)
+        .setRequired(true);
+
+    const row = new ActionRowBuilder().addComponents(motivoInput);
+
+    modal.addComponents(row);
+
+    await interaction.showModal(modal);
+}
 
 const temCargo = interaction.member.roles.cache.has(STAFF_PONTO_ROLE_ID);
 
