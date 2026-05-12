@@ -274,12 +274,15 @@ if (interaction.customId === "iniciar_ponto") {
                 deny: [PermissionFlagsBits.ViewChannel]
             },
             {
-                id: interaction.user.id,
-                allow: [
-                    PermissionFlagsBits.ViewChannel,
-                    PermissionFlagsBits.SendMessages
-                ]
-            }
+    id: interaction.user.id,
+    allow: [
+        PermissionFlagsBits.ViewChannel,
+        PermissionFlagsBits.ReadMessageHistory
+    ],
+    deny: [
+        PermissionFlagsBits.SendMessages
+    ]
+}
         ]
     });
 
