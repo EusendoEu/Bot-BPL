@@ -1118,47 +1118,6 @@ const embed = new EmbedBuilder()
     });
 }
 
-
-     // ==== .Ranking ==== //
-      if (command === "ranking") {
-
-        if (rankingHoras.size === 0) {
-            return message.reply("❌ Ninguém possui horas registradas.");
-        }
-
-        const ranking = [...rankingHoras.entries()]
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 10);
-
-        let texto = "";
-
-        for (let i = 0; i < ranking.length; i++) {
-
-            const [userId, tempo] = ranking[i];
-
-            const membro = await message.guild.members
-                .fetch(userId)
-                .catch(() => null);
-
-            const horas = Math.floor(tempo / 3600000);
-            const minutos = Math.floor((tempo % 3600000) / 60000);
-
-            texto +=
-                `🏅 **${i + 1}°** • ` +
-                `${membro ? membro.user.tag : "Usuário"}\n` +
-                `⏰ ${horas}h ${minutos}m\n\n`;
-        }
-
-        const embed = new EmbedBuilder()
-            .setTitle("🏆 Ranking de Horas")
-            .setDescription(texto)
-            .setColor("Gold")
-            .setTimestamp();
-
-        message.reply({
-            embeds: [embed]
-        });
-    }
 });
 
 
