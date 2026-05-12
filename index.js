@@ -585,7 +585,9 @@ const data = pontos.get(membro.user.id);
 }
 
     data.pausado = true;
-    data.pausaInicio = Date.now();
+data.pausaInicio = Date.now();
+
+salvarPontos();
 
     const embed = EmbedBuilder.from(interaction.message.embeds[0]);
 
@@ -630,7 +632,9 @@ const data = pontos.get(membro.user.id);
     }
 
     data.pausado = false;
-    data.pausaInicio = null;
+data.pausaInicio = null;
+
+salvarPontos();
 
     const embed = EmbedBuilder.from(interaction.message.embeds[0]);
 
