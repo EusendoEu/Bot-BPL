@@ -706,6 +706,46 @@ if (interaction.customId === "fechar_ponto") {
     await interaction.showModal(modal);
 }
 
+        if (interaction.customId === 'fechar_ticket') {
+            if (!interaction.member.roles.cache.has(STAFF_ROLE_ID)) {
+                return interaction.reply({
+                    content: "❌ Você não pode fechar este ticket.",
+                    ephemeral: true
+                });
+            }
+
+            await interaction.reply("🔒 Fechando ticket...");
+
+            const ticket = interaction.channel.ticketData;
+
+            const logEmbed = new EmbedBuilder()
+                .setTitle("📁 Ticket Fechado")
+                .addFields(
+                    { name: "👤 Usuário", value: ticket?.userTag || "Desconhecido", inline: true },
+                    { name: "🛡️ Fechado por", value: interaction.user.tag, inline: true },
+                    { name: " Categoria", value: ticket?.motivo || "Não informado", inline: false }
+                )
+                .setColor("#ff0000")
+                .setFooter({
+    text: `Aberto em: ${ticket?.createdAt?.toLocaleString('pt-BR', {
+        timeZone: 'America/Sao_Paulo'
+    }) || "?"}`
+});
+
+            const logChannel = interaction.guild.channels.cache.get(TICKET_LOG_CHANNEL_ID);
+
+            if (logChannel) {
+                logChannel.send({ embeds: [logEmbed] });
+            }
+
+            setTimeout(() => {
+                interaction.channel.delete().catch(() => {});
+            }, 3000);
+        }
+    }
+}); // <--- O fechamento vital que estava faltando/errado
+
+
 async function fecharPonto(interaction, membro, data, motivo = null) {
 
     let tempoFinal = Date.now() - data.inicio - data.tempoPausado;
@@ -794,45 +834,6 @@ salvarPontos();
     }, 3000);
 }
 
-
-        if (interaction.customId === 'fechar_ticket') {
-            if (!interaction.member.roles.cache.has(STAFF_ROLE_ID)) {
-                return interaction.reply({
-                    content: "❌ Você não pode fechar este ticket.",
-                    ephemeral: true
-                });
-            }
-
-            await interaction.reply("🔒 Fechando ticket...");
-
-            const ticket = interaction.channel.ticketData;
-
-            const logEmbed = new EmbedBuilder()
-                .setTitle("📁 Ticket Fechado")
-                .addFields(
-                    { name: "👤 Usuário", value: ticket?.userTag || "Desconhecido", inline: true },
-                    { name: "🛡️ Fechado por", value: interaction.user.tag, inline: true },
-                    { name: " Categoria", value: ticket?.motivo || "Não informado", inline: false }
-                )
-                .setColor("#ff0000")
-                .setFooter({
-    text: `Aberto em: ${ticket?.createdAt?.toLocaleString('pt-BR', {
-        timeZone: 'America/Sao_Paulo'
-    }) || "?"}`
-});
-
-            const logChannel = interaction.guild.channels.cache.get(TICKET_LOG_CHANNEL_ID);
-
-            if (logChannel) {
-                logChannel.send({ embeds: [logEmbed] });
-            }
-
-            setTimeout(() => {
-                interaction.channel.delete().catch(() => {});
-            }, 3000);
-        }
-    }
-}); // <--- O fechamento vital que estava faltando/errado
 
 
 // ===== COMANDO !painel =====
