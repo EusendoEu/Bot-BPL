@@ -63,30 +63,9 @@ const CALL_TRABALHO_ID = "1416597294035374172";
 const pontos = new Map();
 const intervalosPonto = new Map();
 
-const PONTOS_FILE = "./pontos.json";
+const rankingHoras = new Map();
 
-function salvarPontos() {
-
-    const dados = Object.fromEntries(pontos);
-
-    fs.writeFileSync(
-        PONTOS_FILE,
-        JSON.stringify(dados, null, 2)
-    );
-}
-
-function carregarPontos() {
-
-    if (!fs.existsSync(PONTOS_FILE)) return;
-
-    const dados = JSON.parse(
-        fs.readFileSync(PONTOS_FILE)
-    );
-
-    for (const [id, data] of Object.entries(dados)) {
-        pontos.set(id, data);
-    }
-}
+const RANKING_FILE = "./ranking.json";
 
 // ==================
 
