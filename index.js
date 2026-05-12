@@ -564,16 +564,18 @@ intervalosPonto.set(interaction.user.id, intervalo);
 // ===== PAUSAR =====
 if (interaction.customId === "pausar_ponto") {
 
-    const usuarioCanal = interaction.channel.name
-    .replace("ponto-", "");
-
-const membro = interaction.guild.members.cache.find(
-    m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
+    const data = [...pontos.values()].find(
+    p => p.canalId === interaction.channel.id
 );
 
-if (!membro) return;
+if (!data) {
+    return interaction.reply({
+        content: "❌ Ponto não encontrado.",
+        ephemeral: true
+    });
+}
 
-const data = pontos.get(membro.user.id);
+const membro = await interaction.guild.members.fetch(data.dono);
 
     if (!data) return;
    
@@ -607,16 +609,18 @@ salvarPontos();
 // ===== VOLTAR =====
 if (interaction.customId === "voltar_ponto") {
 
-    const usuarioCanal = interaction.channel.name
-    .replace("ponto-", "");
-
-const membro = interaction.guild.members.cache.find(
-    m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
+    const data = [...pontos.values()].find(
+    p => p.canalId === interaction.channel.id
 );
 
-if (!membro) return;
+if (!data) {
+    return interaction.reply({
+        content: "❌ Ponto não encontrado.",
+        ephemeral: true
+    });
+}
 
-const data = pontos.get(membro.user.id);
+const membro = await interaction.guild.members.fetch(data.dono);
 
     if (!data) return;
 
@@ -654,16 +658,18 @@ salvarPontos();
 // ===== FECHAR =====
 if (interaction.customId === "fechar_ponto") {
 
-    const usuarioCanal = interaction.channel.name
-        .replace("ponto-", "");
+    const data = [...pontos.values()].find(
+    p => p.canalId === interaction.channel.id
+);
 
-    const membro = interaction.guild.members.cache.find(
-        m => m.user.username.toLowerCase() === usuarioCanal.toLowerCase()
-    );
+if (!data) {
+    return interaction.reply({
+        content: "❌ Ponto não encontrado.",
+        ephemeral: true
+    });
+}
 
-    if (!membro) return;
-
-    const data = pontos.get(membro.user.id);
+const membro = await interaction.guild.members.fetch(data.dono);
 
     if (!data) {
         return interaction.reply({
