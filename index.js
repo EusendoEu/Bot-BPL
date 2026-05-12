@@ -335,7 +335,7 @@ if (interaction.customId === "iniciar_ponto") {
             .setStyle(ButtonStyle.Danger)
     );
 
-    await canal.send({
+    const mensagemPonto = await canal.send({
         content: `${interaction.user}`,
         embeds: [embed],
         components: [row]
@@ -345,7 +345,60 @@ if (interaction.customId === "iniciar_ponto") {
         content: `✅ Seu ponto foi iniciado em ${canal}`,
         ephemeral: true
     });
+
+    // Atualizador automático do tempo
+const intervalo = setInterval(async () => {
+
+    const pontoData = pontos.get(interaction.user.id);
+
+    if (!pontoData) {
+        clearInterval(intervalo);
+        intervalosPonto.delete(interaction.user.id);
+        return;
+    }
+
+    let tempoAtual;
+
+    // Se estiver pausado, congela o tempo
+    if (pontoData.pausado) {
+
+        tempoAtual =
+            pontoData.pausaInicio -
+            pontoData.inicio -
+            pontoData.tempoPausado;
+
+    } else {
+
+        tempoAtual =
+            Date.now() -
+            pontoData.inicio -
+            pontoData.tempoPausado;
+    }
+
+    const horas = Math.floor(tempoAtual / 3600000);
+    const minutos = Math.floor((tempoAtual % 3600000) / 60000);
+
+    const tempoFormatado =
+        `${String(horas).padStart(2, "0")}:${String(minutos).padStart(2, "0")}`;
+
+    const embedAtualizado = EmbedBuilder.from(mensagemPonto.embeds[0]);
+
+    embedAtualizado.spliceFields(2, 1, {
+        name: "⏳ Horas em atividade",
+        value: tempoFormatado,
+        inline: false
+    });
+
+    await mensagemPonto.edit({
+        embeds: [embedAtualizado]
+    }).catch(() => {});
+
+}, 60000);
+
+intervalosPonto.set(interaction.user.id, intervalo);
+
 }
+
 
 // ===== PAUSAR =====
 if (interaction.customId === "pausar_ponto") {
