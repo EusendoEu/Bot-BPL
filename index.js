@@ -381,7 +381,9 @@ const intervalo = setInterval(async () => {
     const tempoFormatado =
         `${String(horas).padStart(2, "0")}:${String(minutos).padStart(2, "0")}`;
 
-    const embedAtualizado = EmbedBuilder.from(mensagemPonto.embeds[0]);
+    const mensagemAtual = await mensagemPonto.fetch();
+
+const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
 
     embedAtualizado.spliceFields(2, 1, {
         name: "⏳ Horas em atividade",
