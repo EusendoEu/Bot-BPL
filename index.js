@@ -775,6 +775,8 @@ salvarRanking();
 
     pontos.delete(membro.user.id);
 
+salvarPontos();
+
     if (interaction.replied || interaction.deferred) {
     await interaction.followUp({
         content: "🔴 Ponto encerrado.",
