@@ -319,7 +319,9 @@ if (interaction.customId === "iniciar_ponto") {
     inicio,
     pausado: false,
     tempoPausado: 0,
-    pausaInicio: null
+    pausaInicio: null,
+    canalId: canal.id,
+    mensagemId: null
 });
 
     const embed = new EmbedBuilder()
