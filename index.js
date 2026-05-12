@@ -83,6 +83,40 @@ client.once('ready', () => {
 // ===== INTERAÇÕES =====
 client.on('interactionCreate', async interaction => {
 
+
+    // ===== MODAL FECHAR PONTO =====
+if (interaction.isModalSubmit()) {
+
+    if (interaction.customId.startsWith("motivo_fechamento_")) {
+
+        const userId = interaction.customId.replace("motivo_fechamento_", "");
+
+        const membro = await interaction.guild.members.fetch(userId).catch(() => null);
+
+        if (!membro) {
+            return interaction.reply({
+                content: "❌ Usuário não encontrado.",
+                ephemeral: true
+            });
+        }
+
+        const data = pontos.get(membro.user.id);
+
+        if (!data) {
+            return interaction.reply({
+                content: "❌ Ponto não encontrado.",
+                ephemeral: true
+            });
+        }
+
+        const motivo = interaction.fields.getTextInputValue("motivo");
+
+        await fecharPonto(interaction, membro, data, motivo);
+    }
+}
+
+
+
     // ===== SLASH COMMANDS =====
     if (interaction.isChatInputCommand()) {
 
