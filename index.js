@@ -395,9 +395,18 @@ if (interaction.customId === "iniciar_ponto") {
                 embeds: [embedAtualizado]
             });
 
-            await canal.send({
-                content: `${interaction.user} seu ponto foi pausado automaticamente por ficar mais de 3 minutos fora da call de trabalho.`
-            });
+            const pauseEmbed = new EmbedBuilder()
+    .setTitle("⏸️ Ponto Pausado Automaticamente")
+    .setDescription(
+        `${interaction.user}, seu ponto foi pausado automaticamente.\n\n` +
+        `📌 Motivo: Você ficou mais de 3 minutos fora da call de trabalho.`
+    )
+    .setColor("Yellow")
+    .setTimestamp();
+
+await canal.send({
+    embeds: [pauseEmbed]
+});
         }
 
     } else {
@@ -429,9 +438,18 @@ if (interaction.customId === "iniciar_ponto") {
                 embeds: [embedAtualizado]
             });
 
-            await canal.send({
-                content: `${interaction.user} voltou para a call de trabalho.`
-            });
+            const resumeEmbed = new EmbedBuilder()
+    .setTitle("▶️ Ponto Retomado")
+    .setDescription(
+        `${interaction.user} voltou para a call de trabalho.\n\n` +
+        `⏳ Seu tempo voltou a ser contabilizado normalmente.`
+    )
+    .setColor("Green")
+    .setTimestamp();
+
+await canal.send({
+    embeds: [resumeEmbed]
+});
         }
     }
 
