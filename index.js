@@ -67,6 +67,56 @@ const rankingHoras = new Map();
 
 const RANKING_FILE = "./ranking.json";
 
+
+const PONTOS_FILE = "./pontos.json";
+
+function salvarPontos() {
+
+    const dados = Object.fromEntries(pontos);
+
+    fs.writeFileSync(
+        PONTOS_FILE,
+        JSON.stringify(dados, null, 2)
+    );
+}
+
+function carregarPontos() {
+
+    if (!fs.existsSync(PONTOS_FILE)) return;
+
+    const dados = JSON.parse(
+        fs.readFileSync(PONTOS_FILE)
+    );
+
+    for (const [id, data] of Object.entries(dados)) {
+        pontos.set(id, data);
+    }
+}
+
+function salvarRanking() {
+
+    const dados = Object.fromEntries(rankingHoras);
+
+    fs.writeFileSync(
+        RANKING_FILE,
+        JSON.stringify(dados, null, 2)
+    );
+}
+
+function carregarRanking() {
+
+    if (!fs.existsSync(RANKING_FILE)) return;
+
+    const dados = JSON.parse(
+        fs.readFileSync(RANKING_FILE)
+    );
+
+    for (const [id, tempo] of Object.entries(dados)) {
+        rankingHoras.set(id, tempo);
+    }
+}
+
+
 // ==================
 
 // carregar comandos
@@ -77,6 +127,7 @@ for (const file of commandFiles) {
 }
 client.once('ready', () => {
     carregarPontos();
+    carregarRanking();
     console.log(`Bot online como ${client.user.tag}`);
 
     client.user.setPresence({
