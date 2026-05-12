@@ -409,6 +409,7 @@ if (interaction.customId === "iniciar_ponto") {
 
             pontoData.pausado = true;
             pontoData.pausaInicio = Date.now();
+            salvarPontos();
 
             const mensagemAtual = await mensagemPonto.fetch();
 
