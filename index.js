@@ -541,16 +541,7 @@ if (interaction.customId === "fechar_ponto") {
     await interaction.showModal(modal);
 }
 
-const temCargo = interaction.member.roles.cache.has(STAFF_PONTO_ROLE_ID);
-
-if (interaction.user.id !== data.dono && !temCargo) {
-    return interaction.reply({
-        content: "❌ Você não tem permissão para fechar este ponto.",
-        ephemeral: true
-    });
-}
-
-        async function fecharPonto(interaction, membro, data, motivo = null) {
+async function fecharPonto(interaction, membro, data, motivo = null) {
 
     let tempoFinal = Date.now() - data.inicio - data.tempoPausado;
 
@@ -584,7 +575,6 @@ if (interaction.user.id !== data.dono && !temCargo) {
         .setColor("Red")
         .setTimestamp();
 
-    // Só adiciona motivo se alguém da staff fechou
     if (motivo) {
         logEmbed.addFields({
             name: "📌 Motivo",
@@ -596,22 +586,18 @@ if (interaction.user.id !== data.dono && !temCargo) {
     const logs = interaction.guild.channels.cache.get(PONTO_LOG_CHANNEL_ID);
 
     if (logs) {
-    logs.send({
-        embeds: [logEmbed]
-    });
-}
+        logs.send({
+            embeds: [logEmbed]
+        });
+    }
 
-// Limpa intervalo
-const intervalo = intervalosPonto.get(membro.user.id);
+    // Limpa intervalo
+    const intervalo = intervalosPonto.get(membro.user.id);
 
-if (intervalo) {
-    clearInterval(intervalo);
-    intervalosPonto.delete(membro.user.id);
-}
-
-pontos.delete(membro.user.id);
-
-await interaction.reply({
+    if (intervalo) {
+        clearInterval(intervalo);
+        intervalosPonto.delete(membro.user.id);
+    }
 
     pontos.delete(membro.user.id);
 
