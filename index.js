@@ -596,10 +596,22 @@ if (interaction.user.id !== data.dono && !temCargo) {
     const logs = interaction.guild.channels.cache.get(PONTO_LOG_CHANNEL_ID);
 
     if (logs) {
-        logs.send({
-            embeds: [logEmbed]
-        });
-    }
+    logs.send({
+        embeds: [logEmbed]
+    });
+}
+
+// Limpa intervalo
+const intervalo = intervalosPonto.get(membro.user.id);
+
+if (intervalo) {
+    clearInterval(intervalo);
+    intervalosPonto.delete(membro.user.id);
+}
+
+pontos.delete(membro.user.id);
+
+await interaction.reply({
 
     pontos.delete(membro.user.id);
 
