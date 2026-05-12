@@ -769,10 +769,17 @@ salvarRanking();
 
     pontos.delete(membro.user.id);
 
+    if (interaction.replied || interaction.deferred) {
+    await interaction.followUp({
+        content: "🔴 Ponto encerrado.",
+        ephemeral: true
+    });
+} else {
     await interaction.reply({
         content: "🔴 Ponto encerrado.",
         ephemeral: true
     });
+}
 
     setTimeout(() => {
         interaction.channel.delete().catch(() => {});
