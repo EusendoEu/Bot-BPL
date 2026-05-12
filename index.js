@@ -349,7 +349,7 @@ if (interaction.customId === "iniciar_ponto") {
     });
 
     // Atualizador automático do tempo
-const intervalo = setInterval(async () => {
+     const intervalo = setInterval(async () => {
 
     const pontoData = pontos.get(interaction.user.id);
 
@@ -359,9 +359,85 @@ const intervalo = setInterval(async () => {
         return;
     }
 
+    const membroAtual = await interaction.guild.members.fetch(interaction.user.id);
+
+    const canalVoice = membroAtual.voice.channelId;
+
+    // Se NÃO estiver na call
+    if (canalVoice !== CALL_TRABALHO_ID) {
+
+        // Marca quando saiu
+        if (!pontoData.saiuDaCallEm) {
+            pontoData.saiuDaCallEm = Date.now();
+        }
+
+        // Se ficou 3 minutos fora
+        const tempoFora = Date.now() - pontoData.saiuDaCallEm;
+
+        if (tempoFora >= 180000 && !pontoData.pausado) {
+
+            pontoData.pausado = true;
+            pontoData.pausaInicio = Date.now();
+
+            const mensagemAtual = await mensagemPonto.fetch();
+
+            const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
+
+            embedAtualizado.spliceFields(1, 1, {
+                name: "📌 Status",
+                value: "🟡 Pausado Automaticamente",
+                inline: false
+            });
+
+            embedAtualizado.setColor("Yellow");
+
+            await mensagemPonto.edit({
+                embeds: [embedAtualizado]
+            });
+
+            await canal.send({
+                content: `${interaction.user} seu ponto foi pausado automaticamente por ficar mais de 3 minutos fora da call de trabalho.`
+            });
+        }
+
+    } else {
+
+        // Voltou pra call
+        pontoData.saiuDaCallEm = null;
+
+        // Se estava pausado automático
+        if (pontoData.pausado && pontoData.pausaInicio) {
+
+            pontoData.tempoPausado += Date.now() - pontoData.pausaInicio;
+
+            pontoData.pausado = false;
+            pontoData.pausaInicio = null;
+
+            const mensagemAtual = await mensagemPonto.fetch();
+
+            const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
+
+            embedAtualizado.spliceFields(1, 1, {
+                name: "📌 Status",
+                value: "🟢 Aberto",
+                inline: false
+            });
+
+            embedAtualizado.setColor("Green");
+
+            await mensagemPonto.edit({
+                embeds: [embedAtualizado]
+            });
+
+            await canal.send({
+                content: `${interaction.user} voltou para a call de trabalho.`
+            });
+        }
+    }
+
     let tempoAtual;
 
-    // Se estiver pausado, congela o tempo
+    // Congela enquanto pausado
     if (pontoData.pausado) {
 
         tempoAtual =
@@ -385,7 +461,7 @@ const intervalo = setInterval(async () => {
 
     const mensagemAtual = await mensagemPonto.fetch();
 
-const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
+    const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
 
     embedAtualizado.spliceFields(2, 1, {
         name: "⏳ Horas em atividade",
@@ -400,7 +476,6 @@ const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
 }, 10000);
 
 intervalosPonto.set(interaction.user.id, intervalo);
-
 }
 
 
