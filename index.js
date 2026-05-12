@@ -354,6 +354,8 @@ if (interaction.customId === "iniciar_ponto") {
     mensagemId: null
 });
 
+salvarPontos();
+
     const embed = new EmbedBuilder()
         .setTitle("📋 BATE PONTO")
         .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
