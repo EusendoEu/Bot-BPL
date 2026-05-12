@@ -395,7 +395,7 @@ const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
         embeds: [embedAtualizado]
     }).catch(() => {});
 
-}, 60000);
+}, 10000);
 
 intervalosPonto.set(interaction.user.id, intervalo);
 
