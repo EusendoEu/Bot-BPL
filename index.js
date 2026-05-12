@@ -63,7 +63,7 @@ const CALL_TRABALHO_ID = "1416597294035374172";
 const pontos = new Map();
 const intervalosPonto = new Map();
 
-const rankingHoras = new Map();
+global.rankingHoras = new Map();
 
 const RANKING_FILE = "./ranking.json";
 
