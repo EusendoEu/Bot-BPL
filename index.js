@@ -1120,14 +1120,6 @@ const embed = new EmbedBuilder()
 
 
      // ==== .Ranking ==== //
-
-    const args = message.content
-    .slice(PREFIX.length)
-    .trim()
-    .split(/ +/);
-
-const command = args.shift().toLowerCase();
-
       if (command === "ranking") {
 
         if (rankingHoras.size === 0) {
