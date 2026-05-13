@@ -210,6 +210,7 @@ async function iniciarAtualizadorPonto(userId, guild) {
     .setTimestamp();
 
 await canalAtual.send({
+    content: `<@${userId}>`,
     embeds: [pauseEmbed]
 }).catch(() => {});
 
@@ -252,9 +253,9 @@ await canalAtual.send({
     .setTimestamp();
 
 await canalAtual.send({
+    content: `<@${userId}>`,
     embeds: [resumeEmbed]
 }).catch(() => {});
-
             }
         }
 
