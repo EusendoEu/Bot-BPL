@@ -1,4 +1,4 @@
-jprocess.on('uncaughtException', console.error);
+process.on('uncaughtException', console.error);
 process.on('unhandledRejection', console.error);
 
 const express = require('express');
