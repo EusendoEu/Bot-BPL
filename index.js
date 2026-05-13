@@ -580,6 +580,7 @@ salvarPontos();
     interaction.guild
 );
 
+}
 
 // ===== PAUSAR =====
 if (interaction.customId === "pausar_ponto") {
