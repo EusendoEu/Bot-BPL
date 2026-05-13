@@ -116,6 +116,153 @@ function salvarRanking() {
 
 function carregarRanking() {
 
+
+async function iniciarAtualizadorPonto(userId, guild) {
+
+    const data = pontos.get(userId);
+
+    if (!data) return;
+
+    const canal = guild.channels.cache.get(data.canalId);
+
+    if (!canal) return;
+
+    const intervaloExistente = intervalosPonto.get(userId);
+
+    if (intervaloExistente) {
+        clearInterval(intervaloExistente);
+    }
+
+    const intervalo = setInterval(async () => {
+
+        const pontoData = pontos.get(userId);
+
+        if (!pontoData) {
+            clearInterval(intervalo);
+            intervalosPonto.delete(userId);
+            return;
+        }
+
+        const canalAtual = guild.channels.cache.get(pontoData.canalId);
+
+        if (!canalAtual) return;
+
+        const mensagens = await canalAtual.messages.fetch({ limit: 1 });
+
+        const mensagemPonto = mensagens.first();
+
+        if (!mensagemPonto) return;
+
+        const membroAtual = await guild.members.fetch(userId).catch(() => null);
+
+        if (!membroAtual) return;
+
+        const canalVoice = membroAtual.voice.channelId;
+
+        // PAUSA AUTOMÁTICA
+        if (canalVoice !== CALL_TRABALHO_ID) {
+
+            if (!pontoData.saiuDaCallEm) {
+                pontoData.saiuDaCallEm = Date.now();
+            }
+
+            const tempoFora = Date.now() - pontoData.saiuDaCallEm;
+
+            if (tempoFora >= 180000 && !pontoData.pausado) {
+
+                pontoData.pausado = true;
+                pontoData.pausaInicio = Date.now();
+
+                salvarPontos();
+
+                const embedAtualizado = EmbedBuilder.from(mensagemPonto.embeds[0]);
+
+                embedAtualizado.spliceFields(1, 1, {
+                    name: "📌 Status",
+                    value: "🟡 Pausado Automaticamente",
+                    inline: false
+                });
+
+                embedAtualizado.setColor("Yellow");
+
+                await mensagemPonto.edit({
+                    embeds: [embedAtualizado]
+                }).catch(() => {});
+            }
+
+        } else {
+
+            pontoData.saiuDaCallEm = null;
+
+            if (pontoData.pausado && pontoData.pausaInicio) {
+
+                pontoData.tempoPausado += Date.now() - pontoData.pausaInicio;
+
+                pontoData.pausado = false;
+                pontoData.pausaInicio = null;
+
+                salvarPontos();
+
+                const embedAtualizado = EmbedBuilder.from(mensagemPonto.embeds[0]);
+
+                embedAtualizado.spliceFields(1, 1, {
+                    name: "📌 Status",
+                    value: "🟢 Aberto",
+                    inline: false
+                });
+
+                embedAtualizado.setColor("Green");
+
+                await mensagemPonto.edit({
+                    embeds: [embedAtualizado]
+                }).catch(() => {});
+            }
+        }
+
+        let tempoAtual;
+
+        if (pontoData.pausado) {
+
+            tempoAtual =
+                pontoData.pausaInicio -
+                pontoData.inicio -
+                pontoData.tempoPausado;
+
+        } else {
+
+            tempoAtual =
+                Date.now() -
+                pontoData.inicio -
+                pontoData.tempoPausado;
+        }
+
+        const horas = Math.floor(tempoAtual / 3600000);
+
+        const minutos = Math.floor(
+            (tempoAtual % 3600000) / 60000
+        );
+
+        const tempoFormatado =
+            `${String(horas).padStart(2, "0")}:${String(minutos).padStart(2, "0")}`;
+
+        const embedAtualizado = EmbedBuilder.from(mensagemPonto.embeds[0]);
+
+        embedAtualizado.spliceFields(2, 1, {
+            name: "⏳ Horas em atividade",
+            value: tempoFormatado,
+            inline: false
+        });
+
+        await mensagemPonto.edit({
+            embeds: [embedAtualizado]
+        }).catch(() => {});
+
+    }, 10000);
+
+    intervalosPonto.set(userId, intervalo);
+}
+
+
     if (!fs.existsSync(RANKING_FILE)) return;
 
     const dados = JSON.parse(
@@ -136,10 +283,16 @@ for (const file of commandFiles) {
     const command = require(`./comandos/${file}`);
     client.commands.set(command.data.name, command);
 }
-client.once('ready', () => {
+client.once('ready', async () => {
     carregarPontos();
     carregarRanking();
     console.log(`Bot online como ${client.user.tag}`);
+
+const guild = client.guilds.cache.first();
+
+for (const [userId] of pontos) {
+    iniciarAtualizadorPonto(userId, guild);
+}
 
     client.user.setPresence({
     status: "online",
@@ -423,153 +576,10 @@ salvarPontos();
     });
 
     // Atualizador automático do tempo
-     const intervalo = setInterval(async () => {
-
-    const pontoData = pontos.get(interaction.user.id);
-
-    if (!pontoData) {
-        clearInterval(intervalo);
-        intervalosPonto.delete(interaction.user.id);
-        return;
-    }
-
-    const membroAtual = await interaction.guild.members.fetch(interaction.user.id);
-
-    const canalVoice = membroAtual.voice.channelId;
-
-    // Se NÃO estiver na call
-    if (canalVoice !== CALL_TRABALHO_ID) {
-
-        // Marca quando saiu
-        if (!pontoData.saiuDaCallEm) {
-            pontoData.saiuDaCallEm = Date.now();
-        }
-
-        // Se ficou 3 minutos fora
-        const tempoFora = Date.now() - pontoData.saiuDaCallEm;
-
-        if (tempoFora >= 180000 && !pontoData.pausado) {
-
-            pontoData.pausado = true;
-            pontoData.pausaInicio = Date.now();
-            salvarPontos();
-
-            const mensagemAtual = await mensagemPonto.fetch();
-
-            const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
-
-            embedAtualizado.spliceFields(1, 1, {
-                name: "📌 Status",
-                value: "🟡 Pausado Automaticamente",
-                inline: false
-            });
-
-            embedAtualizado.setColor("Yellow");
-
-            await mensagemPonto.edit({
-                embeds: [embedAtualizado]
-            });
-
-            const pauseEmbed = new EmbedBuilder()
-    .setTitle("⏸️ Ponto Pausado Automaticamente")
-    .setDescription(
-        `${interaction.user}, seu ponto foi pausado automaticamente.\n\n` +
-        `📌 Motivo: Você ficou mais de 3 minutos fora da call de trabalho.`
-    )
-    .setColor("Yellow")
-    .setTimestamp();
-
-await canal.send({
-    embeds: [pauseEmbed]
-});
-        }
-
-    } else {
-
-        // Voltou pra call
-        pontoData.saiuDaCallEm = null;
-
-        // Se estava pausado automático
-        if (pontoData.pausado && pontoData.pausaInicio) {
-
-            pontoData.tempoPausado += Date.now() - pontoData.pausaInicio;
-
-            pontoData.pausado = false;
-            pontoData.pausaInicio = null;
-
-            const mensagemAtual = await mensagemPonto.fetch();
-
-            const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
-
-            embedAtualizado.spliceFields(1, 1, {
-                name: "📌 Status",
-                value: "🟢 Aberto",
-                inline: false
-            });
-
-            embedAtualizado.setColor("Green");
-
-            await mensagemPonto.edit({
-                embeds: [embedAtualizado]
-            });
-
-            const resumeEmbed = new EmbedBuilder()
-    .setTitle("▶️ Ponto Retomado")
-    .setDescription(
-        `${interaction.user} voltou para a call de trabalho.\n\n` +
-        `⏳ Seu tempo voltou a ser contabilizado normalmente.`
-    )
-    .setColor("Green")
-    .setTimestamp();
-
-await canal.send({
-    embeds: [resumeEmbed]
-});
-        }
-    }
-
-    let tempoAtual;
-
-    // Congela enquanto pausado
-    if (pontoData.pausado) {
-
-        tempoAtual =
-            pontoData.pausaInicio -
-            pontoData.inicio -
-            pontoData.tempoPausado;
-
-    } else {
-
-        tempoAtual =
-            Date.now() -
-            pontoData.inicio -
-            pontoData.tempoPausado;
-    }
-
-    const horas = Math.floor(tempoAtual / 3600000);
-    const minutos = Math.floor((tempoAtual % 3600000) / 60000);
-
-    const tempoFormatado =
-        `${String(horas).padStart(2, "0")}:${String(minutos).padStart(2, "0")}`;
-
-    const mensagemAtual = await mensagemPonto.fetch();
-
-    const embedAtualizado = EmbedBuilder.from(mensagemAtual.embeds[0]);
-
-    embedAtualizado.spliceFields(2, 1, {
-        name: "⏳ Horas em atividade",
-        value: tempoFormatado,
-        inline: false
-    });
-
-    await mensagemPonto.edit({
-        embeds: [embedAtualizado]
-    }).catch(() => {});
-
-}, 10000);
-
-intervalosPonto.set(interaction.user.id, intervalo);
-}
+     await iniciarAtualizadorPonto(
+    interaction.user.id,
+    interaction.guild
+);
 
 
 // ===== PAUSAR =====
