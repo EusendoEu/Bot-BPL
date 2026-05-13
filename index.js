@@ -199,6 +199,20 @@ async function iniciarAtualizadorPonto(userId, guild) {
                 await mensagemPonto.edit({
                     embeds: [embedAtualizado]
                 }).catch(() => {});
+    
+                 const pauseEmbed = new EmbedBuilder()
+    .setTitle("⏸️ Ponto Pausado Automaticamente")
+    .setDescription(
+        `<@${userId}>, seu ponto foi pausado automaticamente.\n\n` +
+        `📌 Motivo: Você ficou mais de 3 minutos fora da call de trabalho.`
+    )
+    .setColor("Yellow")
+    .setTimestamp();
+
+await canalAtual.send({
+    embeds: [pauseEmbed]
+}).catch(() => {});
+
             }
 
         } else {
@@ -227,6 +241,20 @@ async function iniciarAtualizadorPonto(userId, guild) {
                 await mensagemPonto.edit({
                     embeds: [embedAtualizado]
                 }).catch(() => {});
+
+                const resumeEmbed = new EmbedBuilder()
+    .setTitle("▶️ Ponto Retomado")
+    .setDescription(
+        `<@${userId}> voltou para a call de trabalho.\n\n` +
+        `⏳ Seu tempo voltou a ser contabilizado normalmente.`
+    )
+    .setColor("Green")
+    .setTimestamp();
+
+await canalAtual.send({
+    embeds: [resumeEmbed]
+}).catch(() => {});
+
             }
         }
 
