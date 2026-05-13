@@ -158,9 +158,9 @@ async function iniciarAtualizadorPonto(userId, guild) {
 
         if (!canalAtual) return;
 
-        const mensagens = await canalAtual.messages.fetch({ limit: 1 });
-
-        const mensagemPonto = mensagens.first();
+        const mensagemPonto = await canalAtual.messages.fetch(
+    pontoData.mensagemId
+).catch(() => null);
 
         if (!mensagemPonto) return;
 
@@ -592,10 +592,14 @@ salvarPontos();
     );
 
     const mensagemPonto = await canal.send({
-        content: `${interaction.user}`,
-        embeds: [embed],
-        components: [row]
-    });
+    content: `${interaction.user}`,
+    embeds: [embed],
+    components: [row]
+});
+
+pontos.get(interaction.user.id).mensagemId = mensagemPonto.id;
+
+salvarPontos();
 
     interaction.reply({
         content: `✅ Seu ponto foi iniciado em ${canal}`,
