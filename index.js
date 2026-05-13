@@ -116,6 +116,17 @@ function salvarRanking() {
 
 function carregarRanking() {
 
+    if (!fs.existsSync(RANKING_FILE)) return;
+
+    const dados = JSON.parse(
+        fs.readFileSync(RANKING_FILE)
+    );
+
+    for (const [id, tempo] of Object.entries(dados)) {
+        rankingHoras.set(id, tempo);
+    }
+}
+
 
 async function iniciarAtualizadorPonto(userId, guild) {
 
@@ -260,18 +271,6 @@ async function iniciarAtualizadorPonto(userId, guild) {
     }, 10000);
 
     intervalosPonto.set(userId, intervalo);
-}
-
-
-    if (!fs.existsSync(RANKING_FILE)) return;
-
-    const dados = JSON.parse(
-        fs.readFileSync(RANKING_FILE)
-    );
-
-    for (const [id, tempo] of Object.entries(dados)) {
-        rankingHoras.set(id, tempo);
-    }
 }
 
 
