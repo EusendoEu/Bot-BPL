@@ -72,12 +72,23 @@ const PONTOS_FILE = "./pontos.json";
 
 function salvarPontos() {
 
-    const dados = Object.fromEntries(pontos);
+    try {
 
-    fs.writeFileSync(
-        PONTOS_FILE,
-        JSON.stringify(dados, null, 2)
-    );
+        const dados = Object.fromEntries(pontos);
+
+        fs.writeFileSync(
+            PONTOS_FILE,
+            JSON.stringify(dados, null, 2),
+            "utf8"
+        );
+
+        console.log("✅ Pontos salvos!");
+
+    } catch (err) {
+
+        console.error("ERRO AO SALVAR PONTOS:", err);
+
+    }
 }
 
 function carregarPontos() {
