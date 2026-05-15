@@ -174,7 +174,7 @@ async function iniciarAtualizadorPonto(userId, guild) {
         const canalVoice = membroAtual.voice.channelId;
 
         // PAUSA AUTOMÁTICA
-        if (canalVoice !== CALL_TRABALHO_ID) {
+        if (!CALL_TRABALHO_ID.includes(canalVoice)) {
 
             if (!pontoData.saiuDaCallEm) {
                 pontoData.saiuDaCallEm = Date.now();
