@@ -44,6 +44,7 @@ if (!interaction.member.roles.cache.has(cargoPermitido)) {
                     value:
                     '`.informacoes` → Informações do servidor\n' +
                     '`.conexao` → IP do servidor\n' +
+                    '`.booster` → Benéficos de impulsionar o servidor\n' +
                     '`.comunidade` → Comunidade oficial',
                     inline: false
                 }
