@@ -976,8 +976,7 @@ client.on('messageCreate', async message => {
     }
 
 // === COMANDO .booster === //
-
-if (message.content === 'booster') {
+if (command === "booster")  {
 
     const embed = {
         color: 0xFF0000,
