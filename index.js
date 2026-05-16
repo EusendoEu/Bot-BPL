@@ -975,62 +975,79 @@ client.on('messageCreate', async message => {
         });
     }
 
+
 // === COMANDO .booster === //
-if (command === "booster")  {
 
-    const embed = {
-        color: 0xFF0000,
-        title: '🚀 BOOSTER | BRASIL PLAY LIFE 🚀',
-        description:
-`✨ *Benefícios exclusivos para quem fortalece o servidor*
+if (command === "booster") {
 
-━━━━━━━━━━━━━━━━━━━━━━━
+    const embed = new EmbedBuilder()
+        .setColor("#ff0000")
 
-\`🔴 1 BOOST\`
-🏷️ Tag exclusiva — <@&671871019312742447>  
-💠 Ícone diferenciado no nick  
-⭐ **15 dias de Sócio Platina**  
-🎁 Acesso a vantagens e eventos exclusivos  
+        .setTitle("<:1129discord:1420916213726314516> BRASIL PLAY LIFE • BOOSTER <:1129discord:1420916213726314516>")
 
-━━━━━━━━━━━━━━━━━━━━━━━
+        .setDescription(
+`> ✨ Impulsione o servidor e desbloqueie vantagens exclusivas dentro do Brasil Play Life.
+> 💎 Quanto mais boosts, maiores serão suas recompensas.
 
-\`🔴 2 BOOST\`
-🏷️ Tag exclusiva — <@&671871019312742447>  
-💠 Ícone diferenciado no nick  
-💎 **15 dias de Sócio Diamante**  
-💵 **1.000 Cash**  
-💰 **25.000 de dinheiro**  
-🎟️ Prioridade em eventos e ações especiais  
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━
+## <:boost:673561429072281630> • 1 BOOST
 
-🎫 **RESGATE DOS BENEFÍCIOS**
-➤ Após dar o **Server Boost**, abra um ticket em  
-👉 <#1415896666749272065>  
+✦ Cargo exclusivo — <@&671871019312742447>  
+✦ Ícone diferenciado no nickname  
+✦ ⭐ 15 dias de **Sócio Platina**  
+✦ Destaque especial no servidor  
+✦ Prioridade em eventos e novidades  
+✦ Reconhecimento oficial como apoiador do servidor  
 
-➤ Marque **<@1168183388356747326>** para resgatar seus benefícios 🚀
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━
+## <:boost:673561429072281630> • 2 BOOSTS
 
-📌 **INFORMAÇÕES IMPORTANTES**
-➤ Os benefícios são válidos apenas enquanto o boost estiver ativo.  
-➤ Caso remova o boost, os benefícios poderão ser retirados automaticamente.  
-➤ O prazo para entrega dos benefícios pode variar conforme disponibilidade da equipe.  
+✦ Cargo exclusivo — <@&671871019312742447>  
+✦ Ícone diferenciado no nickname  
+✦ 💎 15 dias de **Sócio Diamante**  
+✦ 💵 1.000 Cash  
+✦ 💰 25.000 de dinheiro  
+✦ Prioridade em ações especiais  
+✦ Destaque premium dentro da comunidade  
+✦ Benefícios exclusivos liberados para boosters  
 
-━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🙏 *Obrigado por impulsionar o Brasil Play Life e ajudar nosso servidor a crescer cada vez mais!* ❤️
+## 🎫 • COMO RESGATAR
 
-|| @everyone @here // <@&1415896565817671701> ||`,
-        footer: {
-            text: 'Brasil Play Life • Sistema de Booster'
-        },
-        timestamp: new Date()
-    };
+➥ Após realizar o **Server Boost**, abra um ticket em:
+📌 <#1415896666749272065>
 
-    message.channel.send({ embeds: [embed] });
+➥ Informe que deseja resgatar seus benefícios de booster.
+
+➥ Nossa equipe realizará a entrega das recompensas o mais rápido possível. 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## <:emoji_76:1275944533288554506> • INFORMAÇÕES
+
+✦ Os benefícios permanecem ativos enquanto o boost estiver ativo.  
+✦ Caso o boost seja removido, os benefícios poderão ser retirados automaticamente.  
+✦ Algumas vantagens podem ser alteradas futuramente pela administração.  
+✦ O abuso de sistemas ou tentativas de fraude resultará na perda dos benefícios.  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❤️ Obrigado por fortalecer o Brasil Play Life.
+Seu apoio ajuda diretamente no crescimento e evolução do servidor.`)
+
+        .setFooter({
+            text: "Brasil Play Life • Sistema Booster"
+        })
+
+        .setTimestamp();
+
+    message.channel.send({
+        embeds: [embed]
+    });
 }
-
 
 
 // ==== COMANDO .expulsar ==== //
