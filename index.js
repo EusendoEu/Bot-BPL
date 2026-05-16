@@ -899,7 +899,7 @@ salvarPontos();
 
 
 
-// ===== COMANDO !painel =====
+// ===== COMANDO .painel =====
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(PREFIX)) return;
@@ -975,7 +975,7 @@ client.on('messageCreate', async message => {
         });
     }
 
-// === COMANDO !booster === //
+// === COMANDO .booster === //
 
 if (message.content === 'booster') {
 
@@ -1034,7 +1034,7 @@ if (message.content === 'booster') {
 
 
 
-// ==== COMANDO !expulsar ==== //
+// ==== COMANDO .expulsar ==== //
 if (command === "expulsar") {
 
     // ID do usuário permitido
@@ -1091,7 +1091,7 @@ if (!message.member.roles.cache.has(cargoPermitido)) {
 
 
 
-// ==== COMANDO !imformações ====//
+// ==== COMANDO .informações ====//
 if (command === "informacoes") {
 
     const embed = new EmbedBuilder()
@@ -1153,7 +1153,7 @@ if (command === "conexao") {
     message.channel.send({ embeds: [embed] });
 }
 
-//==== COMANDO !comunidade ====//
+//==== COMANDO .comunidade ====//
 if (command === "comunidade") {
 
     const embed = new EmbedBuilder()
