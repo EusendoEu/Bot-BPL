@@ -986,8 +986,8 @@ if (command === "booster") {
         .setTitle("<:1129discord:1420916213726314516> BRASIL PLAY LIFE • BOOSTER <:1129discord:1420916213726314516>")
 
         .setDescription(
-`> ✨ Impulsione o servidor e desbloqueie vantagens exclusivas dentro do Brasil Play Life.
-> 💎 Quanto mais boosts, maiores serão suas recompensas.
+`> <a:arrowNeon:1505331507324125316> Impulsione o servidor e desbloqueie vantagens exclusivas dentro do Brasil Play Life.
+> <a:arrowNeon:1505331507324125316> Quanto mais boosts, maiores serão suas recompensas.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1002,7 +1002,7 @@ if (command === "booster") {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-## <:boost:673561429072281630> • 2 BOOSTS
+## <:11523413143991255241:1505330884809855178> • 2 BOOSTS
 
 ✦ Cargo exclusivo — <@&671871019312742447>  
 ✦ Ícone diferenciado no nickname  
@@ -1015,7 +1015,7 @@ if (command === "booster") {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-## 🎫 • COMO RESGATAR
+## <:emoji_101:1505331082428416204> • COMO RESGATAR
 
 ➥ Após realizar o **Server Boost**, abra um ticket em:
 📌 <#1415896666749272065>
