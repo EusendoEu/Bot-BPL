@@ -61,7 +61,8 @@ const PONTO_CATEGORY_ID = "1503511546368757923";
 const STAFF_PONTO_ROLE_ID = "1415896418765242492";
 const CALL_TRABALHO_ID = [
     "1504649095187271810",
-    "1504649038405046352"
+    "1504649038405046352",
+    "1415896651922669608"
 ];
 
 const pontos = new Map();
@@ -975,96 +976,6 @@ client.on('messageCreate', async message => {
             components: [menu]
         });
     }
-
-
-// ==== COMANDO .status ==== //
-
-if (command === "status") {
-
-    try {
-
-        const state = await Gamedig.query({
-            type: 'samp',
-            host: '151.242.227.124',
-            port: 7779
-        });
-
-        const embed = new EmbedBuilder()
-
-            .setTitle("🌐 STATUS DO SERVIDOR")
-
-            .setColor("Green")
-
-            .setDescription(
-`🚀 Informações em tempo real do servidor.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━`
-            )
-
-            .addFields(
-                {
-                    name: "🟢 STATUS",
-                    value: "Servidor Online",
-                    inline: true
-                },
-                {
-                    name: "👥 PLAYERS",
-                    value: `${state.raw.numplayers}/${state.maxplayers}`,
-                    inline: true
-                },
-                {
-                    name: "📶 PING",
-                    value: `${state.ping}ms`,
-                    inline: true
-                },
-                {
-                    name: "🎮 GAMEMODE",
-                    value: state.raw.gamemode || "Desconhecido",
-                    inline: false
-                },
-                {
-                    name: "🗺️ MAPA",
-                    value: state.map || "San Andreas",
-                    inline: true
-                },
-                {
-                    name: "📡 IP",
-                    value: "`151.242.227.124:7779`",
-                    inline: true
-                }
-            )
-
-            .setFooter({
-                text: "Brasil Play Life • Status em Tempo Real"
-            })
-
-            .setTimestamp();
-
-        message.channel.send({
-            embeds: [embed]
-        });
-
-    } catch (err) {
-
-        const embed = new EmbedBuilder()
-
-            .setTitle("🌐 STATUS DO SERVIDOR")
-
-            .setDescription(
-`🔴 O servidor está offline ou inacessível no momento.`
-            )
-
-            .setColor("Red")
-
-            .setTimestamp();
-
-        message.channel.send({
-            embeds: [embed]
-        });
-    }
-}
-
-
 
 
 // === COMANDO .booster === //
