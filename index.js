@@ -34,6 +34,7 @@ const {
     TextInputStyle
 } = require('discord.js');
 const fs = require('fs');
+const Gamedig = require('gamedig');
 
 const client = new Client({
     intents: [
